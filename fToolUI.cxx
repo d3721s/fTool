@@ -6,6 +6,10 @@ Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
 
 Fl_Menu_Bar *barMain=(Fl_Menu_Bar *)0;
 
+static void cb_menuiteMinimize(Fl_Menu_*, void*) {
+  windowMain->iconize();
+}
+
 Fl_Menu_Item menu_barMain[] = {
  {"@fileopen", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"@filesave", 0,  0, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
@@ -13,10 +17,24 @@ Fl_Menu_Item menu_barMain[] = {
  {"@redo", FL_CONTROL|'y',  0, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"                                                             fTool           "
 "                                                  ", 0,  0, 0, 129, (uchar)FL_NORMAL_LABEL, 1, 14, 0},
- {"@2>", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@2>", 0,  (Fl_Callback*)cb_menuiteMinimize, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"@1+", 0,  0, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
+
+Fl_Group *groupConnect=(Fl_Group *)0;
+
+Fl_Button *buttonConnect=(Fl_Button *)0;
+
+Fl_Button *buttonRead=(Fl_Button *)0;
+
+Fl_Button *buttonCopy=(Fl_Button *)0;
+
+Fl_Button *buttonWrite=(Fl_Button *)0;
+
+Fl_Group *groupRead=(Fl_Group *)0;
+
+Fl_Group *groupWrite=(Fl_Group *)0;
 
 Fl_Double_Window* make_window() {
   { windowMain = new Fl_Double_Window(720, 480, "fTool");
@@ -25,32 +43,32 @@ Fl_Double_Window* make_window() {
       barMain->labeltype(FL_NO_LABEL);
       barMain->menu(menu_barMain);
     } // Fl_Menu_Bar* barMain
-    { Fl_Group* o = new Fl_Group(10, 40, 200, 250);
-      o->box(FL_UP_FRAME);
-      o->labeltype(FL_NO_LABEL);
-      { Fl_Button* o = new Fl_Button(140, 250, 60, 30, "连接");
-        o->type(1);
-        o->down_box(FL_DOWN_BOX);
-      } // Fl_Button* o
-      o->end();
-    } // Fl_Group* o
-    { Fl_Button* o = new Fl_Button(20, 300, 180, 50, "@refresh    一键读取");
-      o->down_box(FL_DOWN_BOX);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(20, 358, 180, 50, "@filenew    复制参数");
-      o->down_box(FL_DOWN_BOX);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(20, 416, 180, 50, "@2->|    一键写入");
-      o->down_box(FL_DOWN_BOX);
-    } // Fl_Button* o
-    { Fl_Group* o = new Fl_Group(220, 40, 490, 210);
-      o->box(FL_UP_FRAME);
-      o->end();
-    } // Fl_Group* o
-    { Fl_Group* o = new Fl_Group(220, 260, 490, 210);
-      o->box(FL_UP_FRAME);
-      o->end();
-    } // Fl_Group* o
+    { groupConnect = new Fl_Group(10, 40, 200, 250);
+      groupConnect->box(FL_UP_FRAME);
+      groupConnect->labeltype(FL_NO_LABEL);
+      { buttonConnect = new Fl_Button(140, 250, 60, 30, "连接");
+        buttonConnect->type(1);
+        buttonConnect->down_box(FL_DOWN_BOX);
+      } // Fl_Button* buttonConnect
+      groupConnect->end();
+    } // Fl_Group* groupConnect
+    { buttonRead = new Fl_Button(20, 300, 180, 50, "@refresh    一键读取");
+      buttonRead->down_box(FL_DOWN_BOX);
+    } // Fl_Button* buttonRead
+    { buttonCopy = new Fl_Button(20, 358, 180, 50, "@filenew    复制参数");
+      buttonCopy->down_box(FL_DOWN_BOX);
+    } // Fl_Button* buttonCopy
+    { buttonWrite = new Fl_Button(20, 416, 180, 50, "@2->|    一键写入");
+      buttonWrite->down_box(FL_DOWN_BOX);
+    } // Fl_Button* buttonWrite
+    { groupRead = new Fl_Group(220, 40, 490, 210);
+      groupRead->box(FL_UP_FRAME);
+      groupRead->end();
+    } // Fl_Group* groupRead
+    { groupWrite = new Fl_Group(220, 260, 490, 210);
+      groupWrite->box(FL_UP_FRAME);
+      groupWrite->end();
+    } // Fl_Group* groupWrite
     windowMain->clear_border();
     windowMain->size_range(720, 480, 720, 480);
     windowMain->end();

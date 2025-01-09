@@ -8,7 +8,21 @@ extern Fl_Double_Window *windowMain;
 #include <FL/Fl_Menu_Bar.H>
 extern Fl_Menu_Bar *barMain;
 #include <FL/Fl_Group.H>
+extern Fl_Group *groupConnect;
 #include <FL/Fl_Button.H>
+extern Fl_Button *buttonConnect;
+extern Fl_Button *buttonRead;
+extern Fl_Button *buttonCopy;
+extern Fl_Button *buttonWrite;
+extern Fl_Group *groupRead;
+extern Fl_Group *groupWrite;
 Fl_Double_Window* make_window();
 extern Fl_Menu_Item menu_barMain[];
+#define menuitemFileopen (menu_barMain+0)
+#define menuitemFilesave (menu_barMain+1)
+#define menuitemUndo (menu_barMain+2)
+#define menuitemRndo (menu_barMain+3)
+#define menuitemTitle (menu_barMain+4)
+#define menuiteMinimize (menu_barMain+5)
+#define menuitemClose (menu_barMain+6)
 #endif

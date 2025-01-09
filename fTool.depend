@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1736387945 source:c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.cxx
+1736388549 source:c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.cxx
 	"fToolUI.h"
 
-1736388014 c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.h
+1736388549 c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Double_Window.H>
 	<FL/Fl_Menu_Bar.H>

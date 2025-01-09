@@ -1,69 +1,81 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0401
+use_FL_COMMAND
+utf8_in_src
 header_name {.h}
 code_name {.cxx}
 Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {965 353 720 480} type Double size_range {720 480 720 480} visible
+    xywh {714 402 720 480} type Double noborder size_range {720 480 720 480} visible
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box OXY_UP_BOX labeltype NO_LABEL
     } {
-      MenuItem {} {
+      MenuItem menuitemFileopen {
         label {@fileopen}
         xywh {0 0 100 20}
       }
-      MenuItem {} {
+      MenuItem menuitemFilesave {
         label {@filesave}
         xywh {0 0 100 20} divider
       }
-      MenuItem {} {
+      MenuItem menuitemUndo {
         label {@undo}
-        xywh {10 10 100 20}
+        xywh {10 10 100 20} shortcut 0x4007a
       }
-      MenuItem {} {
+      MenuItem menuitemRndo {
         label {@redo}
-        xywh {20 20 100 20} divider
+        xywh {20 20 100 20} shortcut 0x40079 divider
       }
-      MenuItem {} {
+      MenuItem menuitemTitle {
         label {                                                             fTool                                                             }
         xywh {0 0 100 20} labelfont 1 deactivate divider
       }
-      MenuItem {} {
+      MenuItem menuiteMinimize {
         label {@2>}
+        callback {\#ifdef _WIN32
+
+\#else
+windowMain->iconize();
+\#endif}
+        comment {//ooiji} selected
         xywh {0 0 100 20}
+        code0 {\#ifdef _WIN32}
+        code1 {\#include <windows.h>}
+        code2 {\#include <FL/Fl_WinAPI.H>}
+        code3 {\#endif}
       }
-      MenuItem {} {
+      MenuItem menuitemClose {
         label {@1+}
         xywh {10 10 100 20} divider
       }
     }
-    Fl_Group {} {open
+    Fl_Group groupConnect {open
       xywh {10 40 200 250} box UP_FRAME labeltype NO_LABEL
     } {
-      Fl_Button {} {
+      Fl_Button buttonConnect {
         label {连接}
-        xywh {140 250 64 30} type Toggle down_box DOWN_BOX
+        xywh {140 250 60 30} type Toggle down_box DOWN_BOX
       }
     }
-    Fl_Button {} {
+    Fl_Button buttonRead {
       label {@refresh    一键读取}
       xywh {20 300 180 50} down_box DOWN_BOX
     }
-    Fl_Button {} {
+    Fl_Button buttonCopy {
       label {@filenew    复制参数}
       xywh {20 358 180 50} down_box DOWN_BOX
     }
-    Fl_Button {} {
+    Fl_Button buttonWrite {
       label {@2->|    一键写入}
       xywh {20 416 180 50} down_box DOWN_BOX
     }
-    Fl_Group {} {open
+    Fl_Group groupRead {open
       xywh {220 40 490 210} box UP_FRAME
     } {}
-    Fl_Group {} {open
+    Fl_Group groupWrite {open
       xywh {220 260 490 210} box UP_FRAME
     } {}
   }
