@@ -2,13 +2,19 @@
 
 #include "fToolUI.h"
 
+static void callbackMenuitemMinimize(Fl_Menu_* w, void*) {
+  Fl_Window* wd = w->window();
+  wd->iconize();
+}
+
+static void callbackMenuitemClose(Fl_Menu_* w, void*) {
+  Fl_Window* wd = w->window();
+  wd->hide();
+}
+
 Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
 
 Fl_Menu_Bar *barMain=(Fl_Menu_Bar *)0;
-
-static void cb_menuiteMinimize(Fl_Menu_*, void*) {
-  windowMain->iconize();
-}
 
 Fl_Menu_Item menu_barMain[] = {
  {"@fileopen", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
@@ -17,8 +23,8 @@ Fl_Menu_Item menu_barMain[] = {
  {"@redo", FL_CONTROL|'y',  0, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"                                                             fTool           "
 "                                                  ", 0,  0, 0, 129, (uchar)FL_NORMAL_LABEL, 1, 14, 0},
- {"@2>", 0,  (Fl_Callback*)cb_menuiteMinimize, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@1+", 0,  0, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@2>", 0,  (Fl_Callback*)callbackMenuitemMinimize, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@1+", 0,  (Fl_Callback*)callbackMenuitemClose, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -69,7 +75,6 @@ Fl_Double_Window* make_window() {
       groupWrite->box(FL_UP_FRAME);
       groupWrite->end();
     } // Fl_Group* groupWrite
-    windowMain->clear_border();
     windowMain->size_range(720, 480, 720, 480);
     windowMain->end();
   } // Fl_Double_Window* windowMain

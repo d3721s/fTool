@@ -18,22 +18,17 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-DWIN32" />
 			<Add option="-mms-bitfields" />
+			<Add option="-O3 -Wall -Wunused -Wno-format-y2k -fno-exceptions -fno-strict-aliasing -ffunction-sections -fdata-sections" />
+			<Add option="-DWIN32" />
 			<Add directory="C:/msys64/ucrt64/include" />
 		</Compiler>
 		<Linker>
-			<Add library="fltk" />
-			<Add library="ole32" />
-			<Add library="uuid" />
-			<Add library="comctl32" />
-			<Add library="wsock32" />
-			<Add library="m" />
-			<Add library="gdi32" />
-			<Add library="user32" />
-			<Add library="kernel32" />
+			<Add option="-L/ucrt64/lib -mwindows -lfltk -lgdiplus -lgdiplus -lole32 -luuid -lcomctl32 -lws2_32 -lwinspool" />
 			<Add directory="C:/msys64/ucrt64/lib" />
 		</Linker>
+		<Unit filename="fToolUI.cxx" />
+		<Unit filename="fToolUI.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

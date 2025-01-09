@@ -7,6 +7,7 @@
 extern Fl_Double_Window *windowMain;
 #include <FL/Fl_Menu_Bar.H>
 extern Fl_Menu_Bar *barMain;
+#include <cstdlib>
 #include <FL/Fl_Group.H>
 extern Fl_Group *groupConnect;
 #include <FL/Fl_Button.H>
@@ -23,6 +24,6 @@ extern Fl_Menu_Item menu_barMain[];
 #define menuitemUndo (menu_barMain+2)
 #define menuitemRndo (menu_barMain+3)
 #define menuitemTitle (menu_barMain+4)
-#define menuiteMinimize (menu_barMain+5)
+#define menuitemMinimize (menu_barMain+5)
 #define menuitemClose (menu_barMain+6)
 #endif

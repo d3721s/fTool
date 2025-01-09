@@ -4,11 +4,23 @@ use_FL_COMMAND
 utf8_in_src
 header_name {.h}
 code_name {.cxx}
+Function {callbackMenuitemMinimize(Fl_Menu_* w, void*)} {open private return_type void
+} {
+  code {Fl_Window* wd = w->window();
+wd->iconize();} {}
+}
+
+Function {callbackMenuitemClose(Fl_Menu_* w, void*)} {open private return_type void
+} {
+  code {Fl_Window* wd = w->window();
+wd->hide();} {}
+}
+
 Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {714 402 720 480} type Double noborder size_range {720 480 720 480} visible
+    xywh {719 453 720 480} type Double hide size_range {720 480 720 480}
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box OXY_UP_BOX labeltype NO_LABEL
@@ -33,23 +45,16 @@ Function {make_window()} {open
         label {                                                             fTool                                                             }
         xywh {0 0 100 20} labelfont 1 deactivate divider
       }
-      MenuItem menuiteMinimize {
+      MenuItem menuitemMinimize {
         label {@2>}
-        callback {\#ifdef _WIN32
-
-\#else
-windowMain->iconize();
-\#endif}
-        comment {//ooiji} selected
+        callback callbackMenuitemMinimize
         xywh {0 0 100 20}
-        code0 {\#ifdef _WIN32}
-        code1 {\#include <windows.h>}
-        code2 {\#include <FL/Fl_WinAPI.H>}
-        code3 {\#endif}
       }
       MenuItem menuitemClose {
         label {@1+}
+        callback callbackMenuitemClose selected
         xywh {10 10 100 20} divider
+        code0 {\#include <cstdlib>}
       }
     }
     Fl_Group groupConnect {open
