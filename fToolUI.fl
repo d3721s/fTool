@@ -6,9 +6,9 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {864 446 720 480} type Double size_range {720 480 720 480} visible
+    xywh {965 353 720 480} type Double size_range {720 480 720 480} visible
   } {
-    Fl_Menu_Bar barMain {
+    Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box OXY_UP_BOX labeltype NO_LABEL
     } {
       MenuItem {} {
@@ -28,8 +28,8 @@ Function {make_window()} {open
         xywh {20 20 100 20} divider
       }
       MenuItem {} {
-        label {                                                              fTool                                                             }
-        xywh {0 0 100 20} deactivate divider
+        label {                                                             fTool                                                             }
+        xywh {0 0 100 20} labelfont 1 deactivate divider
       }
       MenuItem {} {
         label {@2>}
@@ -40,5 +40,31 @@ Function {make_window()} {open
         xywh {10 10 100 20} divider
       }
     }
+    Fl_Group {} {open
+      xywh {10 40 200 250} box UP_FRAME labeltype NO_LABEL
+    } {
+      Fl_Button {} {
+        label {连接}
+        xywh {140 250 64 30} type Toggle down_box DOWN_BOX
+      }
+    }
+    Fl_Button {} {
+      label {@refresh    一键读取}
+      xywh {20 300 180 50} down_box DOWN_BOX
+    }
+    Fl_Button {} {
+      label {@filenew    复制参数}
+      xywh {20 358 180 50} down_box DOWN_BOX
+    }
+    Fl_Button {} {
+      label {@2->|    一键写入}
+      xywh {20 416 180 50} down_box DOWN_BOX
+    }
+    Fl_Group {} {open
+      xywh {220 40 490 210} box UP_FRAME
+    } {}
+    Fl_Group {} {open
+      xywh {220 260 490 210} box UP_FRAME
+    } {}
   }
 }
