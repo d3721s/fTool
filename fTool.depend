@@ -1,0 +1,200 @@
+# depslib dependency file v1.0
+1736387945 source:c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.cxx
+	"fToolUI.h"
+
+1736388014 c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.h
+	<FL/Fl.H>
+	<FL/Fl_Double_Window.H>
+	<FL/Fl_Menu_Bar.H>
+	<FL/Fl_Group.H>
+	<FL/Fl_Button.H>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl.h
+	<FL/fl_config.h>
+	<FL/Fl_Export.H>
+	<FL/platform_types.h>
+	<FL/fl_casts.H>
+	<FL/Fl_Cairo.H>
+	"fl_utf8.h"
+	"Enumerations.H"
+	<string.h>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_config.h
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_export.h
+
+1734249766 c:\msys64\ucrt64\include\fl\platform_types.h
+	<FL/fl_config.h>
+	<time.h>
+	<stddef.h>
+	<stdint.h>
+	<dirent.h>
+	<FL/Fl_Export.H>
+
+1735653377 c:\msys64\ucrt64\include\time.h
+	<crtdefs.h>
+	<sys/timeb.h>
+	<_timeval.h>
+	<pthread_time.h>
+
+1735653377 c:\msys64\ucrt64\include\crtdefs.h
+	<corecrt.h>
+
+1735653377 c:\msys64\ucrt64\include\corecrt.h
+	<_mingw.h>
+	<winapifamily.h>
+
+1735653377 c:\msys64\ucrt64\include\_mingw.h
+	"_mingw_mac.h"
+	"_mingw_secapi.h"
+	"_cygwin.h"
+	<vadefs.h>
+	"sdks/_mingw_ddk.h"
+
+1735653377 c:\msys64\ucrt64\include\_mingw_mac.h
+
+1735653377 c:\msys64\ucrt64\include\_mingw_secapi.h
+
+1735653377 c:\msys64\ucrt64\include\_cygwin.h
+	<stddef.h>
+
+1735653377 c:\msys64\ucrt64\include\stddef.h
+	<crtdefs.h>
+
+1735653377 c:\msys64\ucrt64\include\vadefs.h
+	<_mingw.h>
+
+1735653377 c:\msys64\ucrt64\include\sdks\_mingw_ddk.h
+
+1735653377 c:\msys64\ucrt64\include\winapifamily.h
+
+1735653377 c:\msys64\ucrt64\include\sys\timeb.h
+	<crtdefs.h>
+	<sec_api/sys/timeb_s.h>
+
+1735653377 c:\msys64\ucrt64\include\sec_api\sys\timeb_s.h
+	<sys/timeb.h>
+
+1735653377 c:\msys64\ucrt64\include\_timeval.h
+
+1735312091 c:\msys64\ucrt64\include\pthread_time.h
+	<sys/timeb.h>
+
+1735653377 c:\msys64\ucrt64\include\stdint.h
+	<crtdefs.h>
+	<stddef.h>
+
+1735653377 c:\msys64\ucrt64\include\dirent.h
+	<crtdefs.h>
+	<io.h>
+
+1735653377 c:\msys64\ucrt64\include\io.h
+	<crtdefs.h>
+	<string.h>
+	<_mingw_off_t.h>
+	<string.h>
+
+1735653377 c:\msys64\ucrt64\include\string.h
+	<crtdefs.h>
+	<sec_api/string_s.h>
+
+1735653377 c:\msys64\ucrt64\include\sec_api\string_s.h
+	<string.h>
+
+1735653377 c:\msys64\ucrt64\include\_mingw_off_t.h
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_casts.h
+	<FL/platform_types.h>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_cairo.h
+	<FL/Fl.H>
+	<cairo.h>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_utf8.h
+	"Fl_Export.H"
+	"fl_types.h"
+	<stdio.h>
+	<sys/stat.h>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_types.h
+	"fl_attr.h"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_attr.h
+
+1735653377 c:\msys64\ucrt64\include\stdio.h
+	<corecrt_stdio_config.h>
+	<_mingw_off_t.h>
+	<swprintf.inl>
+	<sec_api/stdio_s.h>
+
+1735653377 c:\msys64\ucrt64\include\corecrt_stdio_config.h
+	<corecrt.h>
+
+1735653377 c:\msys64\ucrt64\include\swprintf.inl
+	<vadefs.h>
+
+1735653377 c:\msys64\ucrt64\include\sec_api\stdio_s.h
+	<stdio.h>
+
+1735653377 c:\msys64\ucrt64\include\sys\stat.h
+	<crtdefs.h>
+	<io.h>
+	<sys/types.h>
+	<_mingw_stat64.h>
+
+1735653377 c:\msys64\ucrt64\include\sys\types.h
+	<crtdefs.h>
+	<_mingw_off_t.h>
+
+1735653377 c:\msys64\ucrt64\include\_mingw_stat64.h
+
+1734249766 c:\msys64\ucrt64\include\fl\enumerations.h
+	<FL/fl_config.h>
+	"Fl_Export.H"
+	"fl_types.h"
+	<FL/platform_types.h>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_double_window.h
+	"Fl_Window.H"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_window.h
+	<FL/Fl.H>
+	<FL/Fl_Group.H>
+	<FL/Fl_Bitmap.H>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_group.h
+	"Fl_Widget.H"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_widget.h
+	"Fl.H"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_bitmap.h
+	"Fl_Image.H"
+	"Fl_Widget.H"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_image.h
+	"Enumerations.H"
+	"Fl_Widget.H"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_menu_bar.h
+	"Fl_Menu_.H"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_menu_.h
+	"Fl_Widget.H"
+	"Fl_Menu_Item.H"
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_menu_item.h
+	<FL/Fl_Widget.H>
+	<FL/Fl_Image.H>
+	<FL/Fl_Multi_Label.H>
+	<FL/platform_types.h>
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_multi_label.h
+
+1734249766 c:\msys64\ucrt64\include\fl\fl_button.h
+	"Fl_Widget.H"
+
+1736387693 source:c:\users\lenovo\desktop\ws\ftool\ftool\main.cpp
+	<FL/Fl.H>
+	"fToolUI.h"
+
