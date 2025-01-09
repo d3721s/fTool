@@ -18,8 +18,19 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-mms-bitfields" />
-			<Add option="-O3 -Wall -Wunused -Wno-format-y2k -fno-exceptions -fno-strict-aliasing -ffunction-sections -fdata-sections" />
+			<Add option="-Wall" />
+			<Add option="-Wunused" />
+			<Add option="-Wno-format-y2k" />
+			<Add option="-fno-exceptions" />
+			<Add option="-fno-strict-aliasing" />
+			<Add option="-ffunction-sections" />
+			<Add option="-fdata-sections" />
+			<Add option="-Wl,--gc-sections" />
+			<Add option="-s" />
+			<Add option="-Oz" />
+			<Add option="-Wl,-strip-all" />
+			<Add option="-ffat-lto-objects" />
+			<Add option="-fno-rtti" />
 			<Add option="-DWIN32" />
 			<Add directory="C:/msys64/ucrt64/include" />
 		</Compiler>

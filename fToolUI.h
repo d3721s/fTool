@@ -3,6 +3,8 @@
 #ifndef fToolUI_h
 #define fToolUI_h
 #include <FL/Fl.H>
+#include <FL/Fl_Native_File_Chooser.H>
+void callbackMenuitemFileopen(Fl_Menu_* w, void*);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *windowMain;
 #include <FL/Fl_Menu_Bar.H>

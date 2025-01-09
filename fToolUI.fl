@@ -4,6 +4,30 @@ use_FL_COMMAND
 utf8_in_src
 header_name {.h}
 code_name {.cxx}
+decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
+}
+
+Function {callbackMenuitemFileopen(Fl_Menu_* w, void*)} {open return_type void
+} {
+  code {Fl_Native_File_Chooser fnfc;
+    fnfc.title("选择配置文件");
+    fnfc.type(Fl_Native_File_Chooser::BROWSE_FILE);
+    fnfc.options(Fl_Native_File_Chooser::SAVEAS_CONFIRM|Fl_Native_File_Chooser::USE_FILTER_EXT|Fl_Native_File_Chooser::NEW_FOLDER );
+    fnfc.filter("fTool Data File\\t*.ftd\\n");
+    switch ( fnfc.show() )
+    {
+    case -1:
+        printf("ERROR: %s\\n", fnfc.errmsg());
+        break;
+    case  1:
+        printf("CANCEL\\n");
+        break;
+    default:
+        printf("PICKED: %s\\n", fnfc.filename());
+        break;
+    }} {}
+}
+
 Function {callbackMenuitemMinimize(Fl_Menu_* w, void*)} {open private return_type void
 } {
   code {Fl_Window* wd = w->window();
@@ -20,13 +44,14 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {719 453 720 480} type Double hide size_range {720 480 720 480}
+    xywh {1340 412 720 480} type Double color 54 labelcolor 45 size_range {720 480 720 480} visible
   } {
-    Fl_Menu_Bar barMain {open
-      xywh {0 0 720 30} box OXY_UP_BOX labeltype NO_LABEL
+    Fl_Menu_Bar barMain {
+      xywh {0 0 720 30} box PLASTIC_THIN_UP_BOX color 54 labeltype NO_LABEL
     } {
       MenuItem menuitemFileopen {
         label {@fileopen}
+        callback callbackMenuitemFileopen
         xywh {0 0 100 20}
       }
       MenuItem menuitemFilesave {
@@ -52,36 +77,36 @@ Function {make_window()} {open
       }
       MenuItem menuitemClose {
         label {@1+}
-        callback callbackMenuitemClose selected
+        callback callbackMenuitemClose
         xywh {10 10 100 20} divider
         code0 {\#include <cstdlib>}
       }
     }
     Fl_Group groupConnect {open
-      xywh {10 40 200 250} box UP_FRAME labeltype NO_LABEL
+      xywh {10 40 200 250} box PLASTIC_THIN_UP_BOX color 54 labeltype NO_LABEL
     } {
       Fl_Button buttonConnect {
         label {连接}
-        xywh {140 250 60 30} type Toggle down_box DOWN_BOX
+        xywh {140 250 60 30} type Toggle box PLASTIC_THIN_UP_BOX down_box PLASTIC_THIN_DOWN_BOX color 54
       }
     }
     Fl_Button buttonRead {
       label {@refresh    一键读取}
-      xywh {20 300 180 50} down_box DOWN_BOX
+      xywh {20 300 180 50} box PLASTIC_THIN_UP_BOX color 54
     }
     Fl_Button buttonCopy {
       label {@filenew    复制参数}
-      xywh {20 358 180 50} down_box DOWN_BOX
+      xywh {20 358 180 50} box PLASTIC_THIN_UP_BOX color 54
     }
     Fl_Button buttonWrite {
       label {@2->|    一键写入}
-      xywh {20 416 180 50} down_box DOWN_BOX
+      xywh {20 416 180 50} box PLASTIC_THIN_UP_BOX color 54
     }
     Fl_Group groupRead {open
-      xywh {220 40 490 210} box UP_FRAME
+      xywh {220 40 490 210} box PLASTIC_THIN_UP_BOX color 54
     } {}
     Fl_Group groupWrite {open
-      xywh {220 260 490 210} box UP_FRAME
+      xywh {220 260 490 210} box PLASTIC_THIN_UP_BOX color 54
     } {}
   }
 }
