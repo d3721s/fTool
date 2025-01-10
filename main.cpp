@@ -5,18 +5,15 @@
 
 #include <FL/Fl.H>
 
-#include "easylogging++.h"
-INITIALIZE_EASYLOGGINGPP
-
 #include "fToolUI.h"
 void* startThreadUI(void* arg);
 void* startThreadMain(void* arg);
 int main (int argc, char ** argv)
 {
-    pthread_t threadUI,threadMain,threadXXX;
+    pthread_t threadUI,threadMain;
 
     if (pthread_create(&threadUI, NULL, startThreadUI, NULL)||
-        pthread_create(&threadMain, NULL, startThreadMain, NULL))
+            pthread_create(&threadMain, NULL, startThreadMain, NULL))
     {
         return -1;
     }

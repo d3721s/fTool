@@ -2,24 +2,28 @@
 
 #include "fToolUI.h"
 
-void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
+static void loadIniGui(const char* filename) {
+  printf("Hello, World!\n");
+}
+
+static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
   Fl_Native_File_Chooser fnfc;
-      fnfc.title("选择配置文件");
+      fnfc.title("选择数据文件");
       fnfc.type(Fl_Native_File_Chooser::BROWSE_FILE);
-      fnfc.options(Fl_Native_File_Chooser::SAVEAS_CONFIRM|Fl_Native_File_Chooser::USE_FILTER_EXT|Fl_Native_File_Chooser::NEW_FOLDER );
+      fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
       fnfc.filter("fTool Data File\t*.ftd\n");
-      switch ( fnfc.show() )
-      {
-      case -1:
-          printf("ERROR: %s\n", fnfc.errmsg());
-          break;
-      case  1:
-          printf("CANCEL\n");
-          break;
-      default:
-          printf("PICKED: %s\n", fnfc.filename());
-          break;
-      }
+      if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
+      loadIniGui(fnfc.filename());
+}
+
+static void callbackMenuitemFilesave(Fl_Menu_* w, void*) {
+  Fl_Native_File_Chooser fnfc;
+      fnfc.title("保存数据文件");
+      fnfc.type(Fl_Native_File_Chooser::BROWSE_SAVE_FILE);
+      fnfc.options(Fl_Native_File_Chooser::SAVEAS_CONFIRM | Fl_Native_File_Chooser::USE_FILTER_EXT);
+      fnfc.filter("fTool Data File\t*.ftd\n");
+      fnfc.preset_file("preset.ftd");
+      if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
 }
 
 static void callbackMenuitemMinimize(Fl_Menu_* w, void*) {
@@ -37,20 +41,25 @@ Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
 Fl_Menu_Bar *barMain=(Fl_Menu_Bar *)0;
 
 Fl_Menu_Item menu_barMain[] = {
- {"@fileopen", 0,  (Fl_Callback*)callbackMenuitemFileopen, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@filesave", 0,  0, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@undo", FL_CONTROL|'z',  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@redo", FL_CONTROL|'y',  0, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"                                                             fTool           "
-"                                                  ", 0,  0, 0, 129, (uchar)FL_NORMAL_LABEL, 1, 14, 0},
+ {"@fileopen", FL_CONTROL|'o',  (Fl_Callback*)callbackMenuitemFileopen, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@filesave", FL_CONTROL|'s',  (Fl_Callback*)callbackMenuitemFilesave, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"                                                                     fTool   "
+"                                                                 ", 0,  0, 0, 1, (uchar)FL_NORMAL_LABEL, 1, 14, 0},
  {"@2>", 0,  (Fl_Callback*)callbackMenuitemMinimize, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@1+", 0,  (Fl_Callback*)callbackMenuitemClose, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@1+", 0,  (Fl_Callback*)callbackMenuitemClose, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
-Fl_Group *groupConnect=(Fl_Group *)0;
+Fl_Group *groupConnectSocket=(Fl_Group *)0;
 
-Fl_Button *buttonConnect=(Fl_Button *)0;
+Fl_Group *groupConnectSerial=(Fl_Group *)0;
+
+Fl_Menu_Item menu_3circle[] = {
+ {"9600", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"115200", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"460800", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 Fl_Button *buttonRead=(Fl_Button *)0;
 
@@ -58,52 +67,108 @@ Fl_Button *buttonCopy=(Fl_Button *)0;
 
 Fl_Button *buttonWrite=(Fl_Button *)0;
 
+Fl_Button *buttonCustom=(Fl_Button *)0;
+
 Fl_Group *groupRead=(Fl_Group *)0;
 
 Fl_Group *groupWrite=(Fl_Group *)0;
 
 Fl_Double_Window* make_window() {
   { windowMain = new Fl_Double_Window(720, 480, "fTool");
-    windowMain->color(FL_LIGHT3);
-    windowMain->labelcolor(FL_DARK2);
+    windowMain->color(FL_LIGHT2);
+    windowMain->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
     { barMain = new Fl_Menu_Bar(0, 0, 720, 30);
-      barMain->box(FL_PLASTIC_THIN_UP_BOX);
-      barMain->color(FL_LIGHT3);
-      barMain->labeltype(FL_NO_LABEL);
+      barMain->color(FL_LIGHT2);
       barMain->menu(menu_barMain);
     } // Fl_Menu_Bar* barMain
-    { groupConnect = new Fl_Group(10, 40, 200, 250);
-      groupConnect->box(FL_PLASTIC_THIN_UP_BOX);
-      groupConnect->color(FL_LIGHT3);
-      groupConnect->labeltype(FL_NO_LABEL);
-      { buttonConnect = new Fl_Button(140, 250, 60, 30, "连接");
-        buttonConnect->type(1);
-        buttonConnect->box(FL_PLASTIC_THIN_UP_BOX);
-        buttonConnect->down_box(FL_PLASTIC_THIN_DOWN_BOX);
-        buttonConnect->color(FL_LIGHT3);
-      } // Fl_Button* buttonConnect
-      groupConnect->end();
-    } // Fl_Group* groupConnect
-    { buttonRead = new Fl_Button(20, 300, 180, 50, "@refresh    一键读取");
-      buttonRead->box(FL_PLASTIC_THIN_UP_BOX);
-      buttonRead->color(FL_LIGHT3);
+    { Fl_Wizard* o = new Fl_Wizard(15, 45, 195, 160);
+      o->color(FL_GRAY0);
+      { groupConnectSocket = new Fl_Group(15, 45, 195, 160);
+        groupConnectSocket->box(FL_THIN_UP_FRAME);
+        groupConnectSocket->color(FL_LIGHT2);
+        groupConnectSocket->labeltype(FL_NO_LABEL);
+        { Fl_Input* o = new Fl_Input(25, 70, 175, 30, "@-3circle  远程主机地址");
+          o->labelfont(1);
+          o->labelsize(15);
+          o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+        } // Fl_Input* o
+        { Fl_Input* o = new Fl_Input(25, 125, 175, 30, "@-3circle  远程主机端口");
+          o->labelfont(1);
+          o->labelsize(15);
+          o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+        } // Fl_Input* o
+        { Fl_Button* o = new Fl_Button(25, 165, 85, 30, "切换到串口");
+          o->color(FL_LIGHT2);
+          o->labelfont(1);
+        } // Fl_Button* o
+        { Fl_Light_Button* o = new Fl_Light_Button(120, 165, 80, 30, "连接");
+          o->box(FL_THIN_UP_BOX);
+          o->color(FL_LIGHT2);
+          o->selection_color(FL_GREEN);
+          o->labelfont(1);
+          o->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
+        } // Fl_Light_Button* o
+        groupConnectSocket->end();
+      } // Fl_Group* groupConnectSocket
+      { groupConnectSerial = new Fl_Group(15, 45, 195, 160);
+        groupConnectSerial->box(FL_THIN_UP_FRAME);
+        groupConnectSerial->color(FL_LIGHT2);
+        groupConnectSerial->labeltype(FL_NO_LABEL);
+        groupConnectSerial->hide();
+        { Fl_Input_Choice* o = new Fl_Input_Choice(25, 70, 175, 30, "@-3circle  端口");
+          o->color(FL_LIGHT2);
+          o->selection_color(FL_LIGHT2);
+          o->labelfont(1);
+          o->labelsize(15);
+          o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+        } // Fl_Input_Choice* o
+        { Fl_Input_Choice* o = new Fl_Input_Choice(25, 125, 175, 30, "@-3circle  波特率(bps)");
+          o->color(FL_LIGHT2);
+          o->selection_color(FL_LIGHT2);
+          o->labelfont(1);
+          o->labelsize(15);
+          o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+          o->menu(menu_3circle);
+        } // Fl_Input_Choice* o
+        { Fl_Button* o = new Fl_Button(25, 165, 85, 30, "切换套接字");
+          o->color(FL_LIGHT2);
+        } // Fl_Button* o
+        { Fl_Light_Button* o = new Fl_Light_Button(120, 165, 80, 30, "打开");
+          o->box(FL_THIN_UP_BOX);
+          o->color(FL_LIGHT2);
+          o->selection_color(FL_GREEN);
+          o->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
+        } // Fl_Light_Button* o
+        groupConnectSerial->end();
+      } // Fl_Group* groupConnectSerial
+      o->end();
+    } // Fl_Wizard* o
+    { buttonRead = new Fl_Button(20, 215, 180, 50, "@refresh    一键读取");
+      buttonRead->box(FL_THIN_UP_BOX);
+      buttonRead->color(FL_LIGHT2);
+      buttonRead->labelfont(1);
     } // Fl_Button* buttonRead
-    { buttonCopy = new Fl_Button(20, 358, 180, 50, "@filenew    复制参数");
-      buttonCopy->box(FL_PLASTIC_THIN_UP_BOX);
-      buttonCopy->color(FL_LIGHT3);
+    { buttonCopy = new Fl_Button(20, 275, 180, 50, "@filenew    复制参数");
+      buttonCopy->box(FL_THIN_UP_BOX);
+      buttonCopy->color(FL_LIGHT2);
+      buttonCopy->labelfont(1);
     } // Fl_Button* buttonCopy
-    { buttonWrite = new Fl_Button(20, 416, 180, 50, "@2->|    一键写入");
-      buttonWrite->box(FL_PLASTIC_THIN_UP_BOX);
-      buttonWrite->color(FL_LIGHT3);
+    { buttonWrite = new Fl_Button(20, 335, 180, 50, "@2->|    一键写入");
+      buttonWrite->box(FL_THIN_UP_BOX);
+      buttonWrite->color(FL_LIGHT2);
+      buttonWrite->labelfont(1);
     } // Fl_Button* buttonWrite
-    { groupRead = new Fl_Group(220, 40, 490, 210);
-      groupRead->box(FL_PLASTIC_THIN_UP_BOX);
-      groupRead->color(FL_LIGHT3);
+    { buttonCustom = new Fl_Button(20, 395, 180, 50, "@<->    自定义按钮1");
+      buttonCustom->box(FL_THIN_UP_BOX);
+      buttonCustom->color(FL_LIGHT2);
+      buttonCustom->labelfont(1);
+    } // Fl_Button* buttonCustom
+    { groupRead = new Fl_Group(220, 45, 485, 205);
+      groupRead->box(FL_THIN_UP_FRAME);
       groupRead->end();
     } // Fl_Group* groupRead
-    { groupWrite = new Fl_Group(220, 260, 490, 210);
-      groupWrite->box(FL_PLASTIC_THIN_UP_BOX);
-      groupWrite->color(FL_LIGHT3);
+    { groupWrite = new Fl_Group(220, 260, 485, 205);
+      groupWrite->box(FL_THIN_UP_FRAME);
       groupWrite->end();
     } // Fl_Group* groupWrite
     windowMain->size_range(720, 480, 720, 480);

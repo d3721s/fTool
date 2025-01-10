@@ -7,34 +7,40 @@ code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
 }
 
-Function {callbackMenuitemFileopen(Fl_Menu_* w, void*)} {open return_type void
+Function {loadIniGui(const char* filename)} {open private return_type void
 } {
-  code {Fl_Native_File_Chooser fnfc;
-    fnfc.title("选择配置文件");
-    fnfc.type(Fl_Native_File_Chooser::BROWSE_FILE);
-    fnfc.options(Fl_Native_File_Chooser::SAVEAS_CONFIRM|Fl_Native_File_Chooser::USE_FILTER_EXT|Fl_Native_File_Chooser::NEW_FOLDER );
-    fnfc.filter("fTool Data File\\t*.ftd\\n");
-    switch ( fnfc.show() )
-    {
-    case -1:
-        printf("ERROR: %s\\n", fnfc.errmsg());
-        break;
-    case  1:
-        printf("CANCEL\\n");
-        break;
-    default:
-        printf("PICKED: %s\\n", fnfc.filename());
-        break;
-    }} {}
+  code {printf("Hello, World!\\n");} {}
 }
 
-Function {callbackMenuitemMinimize(Fl_Menu_* w, void*)} {open private return_type void
+Function {callbackMenuitemFileopen(Fl_Menu_* w, void*)} {open private return_type void
+} {
+  code {Fl_Native_File_Chooser fnfc;
+    fnfc.title("选择数据文件");
+    fnfc.type(Fl_Native_File_Chooser::BROWSE_FILE);
+    fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
+    fnfc.filter("fTool Data File\\t*.ftd\\n");
+    if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
+    loadIniGui(fnfc.filename());} {}
+}
+
+Function {callbackMenuitemFilesave(Fl_Menu_* w, void*)} {open private return_type void
+} {
+  code {Fl_Native_File_Chooser fnfc;
+    fnfc.title("保存数据文件");
+    fnfc.type(Fl_Native_File_Chooser::BROWSE_SAVE_FILE);
+    fnfc.options(Fl_Native_File_Chooser::SAVEAS_CONFIRM | Fl_Native_File_Chooser::USE_FILTER_EXT);
+    fnfc.filter("fTool Data File\\t*.ftd\\n");
+    fnfc.preset_file("preset.ftd");
+    if ((fnfc.show() != 0) ||(!fnfc.filename())) return;} {}
+}
+
+Function {callbackMenuitemMinimize(Fl_Menu_* w, void*)} {private return_type void
 } {
   code {Fl_Window* wd = w->window();
 wd->iconize();} {}
 }
 
-Function {callbackMenuitemClose(Fl_Menu_* w, void*)} {open private return_type void
+Function {callbackMenuitemClose(Fl_Menu_* w, void*)} {private return_type void
 } {
   code {Fl_Window* wd = w->window();
 wd->hide();} {}
@@ -43,32 +49,25 @@ wd->hide();} {}
 Function {make_window()} {open
 } {
   Fl_Window windowMain {
-    label fTool open
-    xywh {1340 412 720 480} type Double color 54 labelcolor 45 size_range {720 480 720 480} visible
+    label fTool open selected
+    xywh {943 343 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
-    Fl_Menu_Bar barMain {
-      xywh {0 0 720 30} box PLASTIC_THIN_UP_BOX color 54 labeltype NO_LABEL
+    Fl_Menu_Bar barMain {open
+      xywh {0 0 720 30} color 52
     } {
       MenuItem menuitemFileopen {
         label {@fileopen}
         callback callbackMenuitemFileopen
-        xywh {0 0 100 20}
+        xywh {0 0 100 20} shortcut 0x4006f
       }
       MenuItem menuitemFilesave {
         label {@filesave}
-        xywh {0 0 100 20} divider
-      }
-      MenuItem menuitemUndo {
-        label {@undo}
-        xywh {10 10 100 20} shortcut 0x4007a
-      }
-      MenuItem menuitemRndo {
-        label {@redo}
-        xywh {20 20 100 20} shortcut 0x40079 divider
+        callback callbackMenuitemFilesave
+        xywh {0 0 100 20} shortcut 0x40073
       }
       MenuItem menuitemTitle {
-        label {                                                             fTool                                                             }
-        xywh {0 0 100 20} labelfont 1 deactivate divider
+        label {                                                                     fTool                                                                    }
+        xywh {0 0 100 20} labelfont 1 deactivate
       }
       MenuItem menuitemMinimize {
         label {@2>}
@@ -78,35 +77,88 @@ Function {make_window()} {open
       MenuItem menuitemClose {
         label {@1+}
         callback callbackMenuitemClose
-        xywh {10 10 100 20} divider
+        xywh {10 10 100 20}
         code0 {\#include <cstdlib>}
       }
     }
-    Fl_Group groupConnect {open
-      xywh {10 40 200 250} box PLASTIC_THIN_UP_BOX color 54 labeltype NO_LABEL
+    Fl_Wizard {} {open
+      xywh {15 45 195 160} color 32
     } {
-      Fl_Button buttonConnect {
-        label {连接}
-        xywh {140 250 60 30} type Toggle box PLASTIC_THIN_UP_BOX down_box PLASTIC_THIN_DOWN_BOX color 54
+      Fl_Group groupConnectSocket {open
+        xywh {15 45 195 160} box THIN_UP_FRAME color 52 labeltype NO_LABEL
+      } {
+        Fl_Input {} {
+          label {@-3circle  远程主机地址}
+          xywh {25 70 175 30} labelfont 1 labelsize 15 align 5
+        }
+        Fl_Input {} {
+          label {@-3circle  远程主机端口}
+          xywh {25 125 175 30} labelfont 1 labelsize 15 align 5
+        }
+        Fl_Button {} {
+          label {切换到串口}
+          xywh {25 165 85 30} color 52 labelfont 1
+        }
+        Fl_Light_Button {} {
+          label {连接}
+          xywh {120 165 80 30} box THIN_UP_BOX color 52 selection_color 63 labelfont 1 align 16
+        }
+      }
+      Fl_Group groupConnectSerial {open
+        xywh {15 45 195 160} box THIN_UP_FRAME color 52 labeltype NO_LABEL hide
+      } {
+        Fl_Input_Choice {} {
+          label {@-3circle  端口}
+          xywh {25 70 175 30} color 52 selection_color 52 labelfont 1 labelsize 15 align 5
+        } {}
+        Fl_Input_Choice {} {
+          label {@-3circle  波特率(bps)} open
+          xywh {25 125 175 30} color 52 selection_color 52 labelfont 1 labelsize 15 align 5
+        } {
+          MenuItem {} {
+            label 9600
+            xywh {0 0 100 20}
+          }
+          MenuItem {} {
+            label 115200
+            xywh {0 0 100 20}
+          }
+          MenuItem {} {
+            label 460800
+            xywh {0 0 100 20}
+          }
+        }
+        Fl_Button {} {
+          label {切换套接字}
+          xywh {25 165 85 30} color 52
+        }
+        Fl_Light_Button {} {
+          label {打开}
+          xywh {120 165 80 30} box THIN_UP_BOX color 52 selection_color 63 align 16
+        }
       }
     }
     Fl_Button buttonRead {
       label {@refresh    一键读取}
-      xywh {20 300 180 50} box PLASTIC_THIN_UP_BOX color 54
+      xywh {20 215 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Button buttonCopy {
       label {@filenew    复制参数}
-      xywh {20 358 180 50} box PLASTIC_THIN_UP_BOX color 54
+      xywh {20 275 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Button buttonWrite {
       label {@2->|    一键写入}
-      xywh {20 416 180 50} box PLASTIC_THIN_UP_BOX color 54
+      xywh {20 335 180 50} box THIN_UP_BOX color 52 labelfont 1
+    }
+    Fl_Button buttonCustom {
+      label {@<->    自定义按钮1}
+      xywh {20 395 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Group groupRead {open
-      xywh {220 40 490 210} box PLASTIC_THIN_UP_BOX color 54
+      xywh {220 45 485 205} box THIN_UP_FRAME
     } {}
     Fl_Group groupWrite {open
-      xywh {220 260 490 210} box PLASTIC_THIN_UP_BOX color 54
+      xywh {220 260 485 205} box THIN_UP_FRAME
     } {}
   }
 }
