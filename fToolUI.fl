@@ -7,6 +7,9 @@ code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
 }
 
+decl {\#include "log.h"} {selected private global
+}
+
 Function {callbackMenuitemFileopen(Fl_Menu_* w, void*)} {open private return_type void
 } {
   code {Fl_Native_File_Chooser fnfc;
@@ -15,7 +18,6 @@ Function {callbackMenuitemFileopen(Fl_Menu_* w, void*)} {open private return_typ
     fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
     fnfc.filter("fTool Data File\\t*.ftd\\n");
     if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-    loadIniGui(fnfc.filename());
     //readini} {}
 }
 
@@ -47,7 +49,7 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {828 308 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
+    xywh {1214 310 720 480} type Double color 52 align 16 hide size_range {720 480 720 480}
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} color 52
@@ -68,7 +70,7 @@ Function {make_window()} {open
       }
       MenuItem menuitemMinimize {
         label {@2>}
-        callback callbackMenuitemMinimize selected
+        callback callbackMenuitemMinimize
         xywh {0 0 100 20}
       }
       MenuItem menuitemClose {

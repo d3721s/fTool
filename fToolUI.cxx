@@ -9,7 +9,6 @@ static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
       fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
       fnfc.filter("fTool Data File\t*.ftd\n");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-      loadIniGui(fnfc.filename());
       //readini
 }
 

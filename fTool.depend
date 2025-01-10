@@ -15,7 +15,7 @@
 	<FL/Fl_Light_Button.H>
 	<FL/Fl_Input_Choice.H>
 
-1736389587 c:\msys64\ucrt64\include\fl\fl.h
+1735914741 c:\msys64\ucrt64\include\fl\fl.h
 	<FL/fl_config.h>
 	<FL/Fl_Export.H>
 	<FL/platform_types.h>
@@ -25,11 +25,11 @@
 	"Enumerations.H"
 	<string.h>
 
-1736389595 c:\msys64\ucrt64\include\fl\fl_config.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_config.h
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_export.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_export.h
 
-1736389596 c:\msys64\ucrt64\include\fl\platform_types.h
+1735914745 c:\msys64\ucrt64\include\fl\platform_types.h
 	<FL/fl_config.h>
 	<time.h>
 	<stddef.h>
@@ -109,23 +109,23 @@
 
 1735653377 c:\msys64\ucrt64\include\_mingw_off_t.h
 
-1736389595 c:\msys64\ucrt64\include\fl\fl_casts.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_casts.h
 	<FL/platform_types.h>
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_cairo.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_cairo.h
 	<FL/Fl.H>
 	<cairo.h>
 
-1736389595 c:\msys64\ucrt64\include\fl\fl_utf8.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_utf8.h
 	"Fl_Export.H"
 	"fl_types.h"
 	<stdio.h>
 	<sys/stat.h>
 
-1736389595 c:\msys64\ucrt64\include\fl\fl_types.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_types.h
 	"fl_attr.h"
 
-1736389595 c:\msys64\ucrt64\include\fl\fl_attr.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_attr.h
 
 1735653377 c:\msys64\ucrt64\include\stdio.h
 	<corecrt_stdio_config.h>
@@ -154,50 +154,50 @@
 
 1735653377 c:\msys64\ucrt64\include\_mingw_stat64.h
 
-1736389587 c:\msys64\ucrt64\include\fl\enumerations.h
+1735914741 c:\msys64\ucrt64\include\fl\enumerations.h
 	<FL/fl_config.h>
 	"Fl_Export.H"
 	"fl_types.h"
 	<FL/platform_types.h>
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_double_window.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_double_window.h
 	"Fl_Window.H"
 
-1736389594 c:\msys64\ucrt64\include\fl\fl_window.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_window.h
 	<FL/Fl.H>
 	<FL/Fl_Group.H>
 	<FL/Fl_Bitmap.H>
 
-1736389589 c:\msys64\ucrt64\include\fl\fl_group.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_group.h
 	"Fl_Widget.H"
 
-1736389594 c:\msys64\ucrt64\include\fl\fl_widget.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_widget.h
 	"Fl.H"
 
-1736389587 c:\msys64\ucrt64\include\fl\fl_bitmap.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_bitmap.h
 	"Fl_Image.H"
 	"Fl_Widget.H"
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_image.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_image.h
 	"Enumerations.H"
 	"Fl_Widget.H"
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_menu_bar.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_menu_bar.h
 	"Fl_Menu_.H"
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_menu_.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_menu_.h
 	"Fl_Widget.H"
 	"Fl_Menu_Item.H"
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_menu_item.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_menu_item.h
 	<FL/Fl_Widget.H>
 	<FL/Fl_Image.H>
 	<FL/Fl_Multi_Label.H>
 	<FL/platform_types.h>
 
-1736389591 c:\msys64\ucrt64\include\fl\fl_multi_label.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_multi_label.h
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_button.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_button.h
 	"Fl_Widget.H"
 
 1736475216 source:c:\users\lenovo\desktop\ws\ftool\ftool\main.cpp
@@ -1123,25 +1123,31 @@
 1736389591 c:\msys64\ucrt64\include\fl\fl_png_image.h
 	"Fl_Image.H"
 
-1736434167 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
+1736505027 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
 	"fToolUI.h"
 
-1736434764 c:\users\runyu\desktop\ftool\ftoolui.h
+1736505027 c:\users\runyu\desktop\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Native_File_Chooser.H>
 	<FL/Fl_Double_Window.H>
 	<FL/Fl_Menu_Bar.H>
 	<cstdlib>
+	<FL/Fl_Wizard.H>
 	<FL/Fl_Group.H>
+	<FL/Fl_Input.H>
 	<FL/Fl_Button.H>
+	<FL/Fl_Light_Button.H>
+	<FL/Fl_Input_Choice.H>
 
-1736424480 source:c:\users\runyu\desktop\ftool\main.cpp
+1736513457 source:c:\users\runyu\desktop\ftool\main.cpp
 	<iostream>
 	<pthread.h>
 	<thread>
 	<chrono>
+	<windows.h>
 	<FL/Fl.H>
-	"easylogging++.h"
+	"log.h"
+	"ini.h"
 	"fToolUI.h"
 
 1735312091 c:\msys64\ucrt64\include\pthread.h
@@ -1175,7 +1181,7 @@
 
 1735312091 c:\msys64\ucrt64\include\pthread_unistd.h
 
-1736418122 source:c:\users\runyu\desktop\ftool\easylogging++.cc
+1736500399 source:c:\users\runyu\desktop\ftool\easylogging++.cc
 	"easylogging++.h"
 
 1736418122 c:\users\runyu\desktop\ftool\easylogging++.h
@@ -1333,8 +1339,17 @@
 	"ini.h"
 	"INIReader.h"
 
-1730020533 c:\users\runyu\desktop\ftool\ini.h
-	<stdio.h>
+1727728356 c:\users\runyu\desktop\ftool\ini.h
+	<string>
+	<sstream>
+	<algorithm>
+	<utility>
+	<unordered_map>
+	<vector>
+	<memory>
+	<fstream>
+	<sys/stat.h>
+	<cctype>
 
 1730020533 c:\users\runyu\desktop\ftool\inireader.h
 	<map>
@@ -1349,13 +1364,13 @@
 	<stddef.h>
 	<stdlib.h>
 
-1736389591 c:\msys64\ucrt64\include\fl\fl_native_file_chooser.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_native_file_chooser.h
 	<FL/Fl_Export.H>
 	<FL/Fl_File_Chooser.H>
 	<FL/Fl_Native_File_Chooser.H>
 	<FL/Fl_Native_File_Chooser.H>
 
-1736389589 c:\msys64\ucrt64\include\fl\fl_file_chooser.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_file_chooser.h
 	<FL/Fl.H>
 	<FL/Fl_Double_Window.H>
 	<FL/Fl_Group.H>
@@ -1371,77 +1386,77 @@
 	<FL/Fl_Return_Button.H>
 	<FL/fl_ask.H>
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_choice.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_choice.h
 	"Fl_Menu_.H"
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Choice.H>
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_menu_button.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_menu_button.h
 	"Fl_Menu_.H"
 
-1736389592 c:\msys64\ucrt64\include\fl\fl_preferences.h
+1735914743 c:\msys64\ucrt64\include\fl\fl_preferences.h
 	<stdio.h>
 	"Fl_Export.H"
 	"fl_attr.h"
 	<string>
 
-1736389593 c:\msys64\ucrt64\include\fl\fl_tile.h
+1735914743 c:\msys64\ucrt64\include\fl\fl_tile.h
 	"Fl_Group.H"
 
-1736389589 c:\msys64\ucrt64\include\fl\fl_file_browser.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_file_browser.h
 	"Fl_Browser.H"
 	"Fl_File_Icon.H"
 	"filename.H"
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_browser.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_browser.h
 	"Fl_Browser_.H"
 	"Fl_Image.H"
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_browser_.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_browser_.h
 	"Fl_Group.H"
 	"Fl_Scrollbar.H"
 	<FL/Fl.H>
 
-1736389592 c:\msys64\ucrt64\include\fl\fl_scrollbar.h
+1735914743 c:\msys64\ucrt64\include\fl\fl_scrollbar.h
 	"Fl_Slider.H"
 
-1736389593 c:\msys64\ucrt64\include\fl\fl_slider.h
+1735914743 c:\msys64\ucrt64\include\fl\fl_slider.h
 	"Fl_Valuator.H"
 
-1736389594 c:\msys64\ucrt64\include\fl\fl_valuator.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_valuator.h
 	"Fl_Widget.H"
 
-1736389589 c:\msys64\ucrt64\include\fl\fl_file_icon.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_file_icon.h
 	"Fl.H"
 
-1736389595 c:\msys64\ucrt64\include\fl\filename.h
+1735914744 c:\msys64\ucrt64\include\fl\filename.h
 	"Fl_Export.H"
 	<FL/platform_types.h>
 	<FL/filename.H>
 
-1736389587 c:\msys64\ucrt64\include\fl\fl_box.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_box.h
 	"Fl_Widget.H"
 
-1736389588 c:\msys64\ucrt64\include\fl\fl_check_button.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_check_button.h
 	"Fl_Light_Button.H"
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_light_button.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_light_button.h
 	"Fl_Button.H"
 
-1736389589 c:\msys64\ucrt64\include\fl\fl_file_input.h
+1735914741 c:\msys64\ucrt64\include\fl\fl_file_input.h
 	<FL/Fl_Input.H>
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_input.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_input.h
 	"Fl_Input_.H"
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_input_.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_input_.h
 	"Fl_Widget.H"
 
-1736389592 c:\msys64\ucrt64\include\fl\fl_return_button.h
+1735914743 c:\msys64\ucrt64\include\fl\fl_return_button.h
 	"Fl_Button.H"
 
-1736389595 c:\msys64\ucrt64\include\fl\fl_ask.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_ask.h
 	<FL/Enumerations.H>
 	<FL/fl_attr.h>
 	<string>
@@ -1567,10 +1582,10 @@
 	<crtdefs.h>
 	<stdlib.h>
 
-1736389594 c:\msys64\ucrt64\include\fl\fl_wizard.h
+1735914744 c:\msys64\ucrt64\include\fl\fl_wizard.h
 	<FL/Fl_Group.H>
 
-1736389590 c:\msys64\ucrt64\include\fl\fl_input_choice.h
+1735914742 c:\msys64\ucrt64\include\fl\fl_input_choice.h
 	<FL/Fl.H>
 	<FL/Fl_Group.H>
 	<FL/Fl_Input.H>
@@ -1578,4 +1593,22 @@
 
 1736389592 c:\msys64\ucrt64\include\fl\fl_progress.h
 	"Fl_Widget.H"
+
+1736507118 source:c:\users\runyu\desktop\ftool\log.c
+	"log.h"
+
+1736507265 c:\users\runyu\desktop\ftool\log.h
+	<stdio.h>
+	<stdarg.h>
+	<stdbool.h>
+	<time.h>
+
+1592653367 c:\users\runyu\desktop\ftool\rxilog.h
+	<stdio.h>
+	<stdarg.h>
+	<stdbool.h>
+	<time.h>
+
+1736506838 source:c:\users\runyu\desktop\ftool\rxilog.c
+	"rxilog.h"
 
