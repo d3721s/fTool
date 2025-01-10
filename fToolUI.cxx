@@ -2,10 +2,6 @@
 
 #include "fToolUI.h"
 
-static void loadIniGui(const char* filename) {
-  printf("Hello, World!\n");
-}
-
 static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
   Fl_Native_File_Chooser fnfc;
       fnfc.title("选择数据文件");
@@ -14,6 +10,7 @@ static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
       fnfc.filter("fTool Data File\t*.ftd\n");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
       loadIniGui(fnfc.filename());
+      //readini
 }
 
 static void callbackMenuitemFilesave(Fl_Menu_* w, void*) {
@@ -24,6 +21,7 @@ static void callbackMenuitemFilesave(Fl_Menu_* w, void*) {
       fnfc.filter("fTool Data File\t*.ftd\n");
       fnfc.preset_file("preset.ftd");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
+      //saveini
 }
 
 static void callbackMenuitemMinimize(Fl_Menu_* w, void*) {
@@ -87,6 +85,7 @@ Fl_Double_Window* make_window() {
         groupConnectSocket->box(FL_THIN_UP_FRAME);
         groupConnectSocket->color(FL_LIGHT2);
         groupConnectSocket->labeltype(FL_NO_LABEL);
+        groupConnectSocket->hide();
         { Fl_Input* o = new Fl_Input(25, 70, 175, 30, "@-3circle  远程主机地址");
           o->labelfont(1);
           o->labelsize(15);
@@ -114,7 +113,6 @@ Fl_Double_Window* make_window() {
         groupConnectSerial->box(FL_THIN_UP_FRAME);
         groupConnectSerial->color(FL_LIGHT2);
         groupConnectSerial->labeltype(FL_NO_LABEL);
-        groupConnectSerial->hide();
         { Fl_Input_Choice* o = new Fl_Input_Choice(25, 70, 175, 30, "@-3circle  端口");
           o->color(FL_LIGHT2);
           o->selection_color(FL_LIGHT2);
