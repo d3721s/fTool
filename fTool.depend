@@ -1123,12 +1123,14 @@
 1736389591 c:\msys64\ucrt64\include\fl\fl_png_image.h
 	"Fl_Image.H"
 
-1736505027 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
+1736613745 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
 	"fToolUI.h"
 
-1736505027 c:\users\runyu\desktop\ftool\ftoolui.h
+1736613745 c:\users\runyu\desktop\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Native_File_Chooser.H>
+	"log.h"
+	"ini.h"
 	<FL/Fl_Double_Window.H>
 	<FL/Fl_Menu_Bar.H>
 	<cstdlib>
@@ -1139,7 +1141,7 @@
 	<FL/Fl_Light_Button.H>
 	<FL/Fl_Input_Choice.H>
 
-1736513457 source:c:\users\runyu\desktop\ftool\main.cpp
+1736611483 source:c:\users\runyu\desktop\ftool\main.cpp
 	<iostream>
 	<pthread.h>
 	<thread>

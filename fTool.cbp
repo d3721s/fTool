@@ -11,10 +11,6 @@
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-					<Add option="-s" />
-				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
@@ -40,7 +36,7 @@
 			<Add directory="C:/msys64/ucrt64/include" />
 		</Compiler>
 		<Linker>
-			<Add option="-L/ucrt64/lib -mwindows -lfltk -lgdiplus -lgdiplus -lole32 -luuid -lcomctl32 -lws2_32 -lwinspool" />
+			<Add option="-L/ucrt64/lib -static -mwindows -lfltk -lgdiplus -lgdiplus -lole32 -luuid -lcomctl32 -lws2_32 -lwinspool" />
 			<Add directory="C:/msys64/ucrt64/lib" />
 		</Linker>
 		<Unit filename="fToolUI.cxx" />

@@ -4,6 +4,10 @@
 #define fToolUI_h
 #include <FL/Fl.H>
 #include <FL/Fl_Native_File_Chooser.H>
+#include "log.h"
+#include "ini.h"
+void pushFTD(mINI::INIStructure* fileIni);
+void pullFTD(mINI::INIStructure* fileIni);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *windowMain;
 #include <FL/Fl_Menu_Bar.H>

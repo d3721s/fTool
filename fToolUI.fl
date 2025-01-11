@@ -7,7 +7,18 @@ code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
 }
 
-decl {\#include "log.h"} {selected private global
+decl {\#include "log.h"
+\#include "ini.h"} {public local
+}
+
+Function {pushFTD(mINI::INIStructure* fileIni)} {open
+} {
+  code {printf("Hello, World!\\n");} {}
+}
+
+Function {pullFTD(mINI::INIStructure* fileIni)} {open return_type void
+} {
+  code {printf("Hello, World!\\n");} {}
 }
 
 Function {callbackMenuitemFileopen(Fl_Menu_* w, void*)} {open private return_type void
@@ -18,7 +29,11 @@ Function {callbackMenuitemFileopen(Fl_Menu_* w, void*)} {open private return_typ
     fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
     fnfc.filter("fTool Data File\\t*.ftd\\n");
     if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-    //readini} {}
+    log_info("Select data file");
+    mINI::INIFile fileFTD(fnfc.filename());
+    mINI::INIStructure FTD;
+    fileFTD.read(FTD);
+    pullFTD(&FTD);} {}
 }
 
 Function {callbackMenuitemFilesave(Fl_Menu_* w, void*)} {open private return_type void
@@ -30,7 +45,12 @@ Function {callbackMenuitemFilesave(Fl_Menu_* w, void*)} {open private return_typ
     fnfc.filter("fTool Data File\\t*.ftd\\n");
     fnfc.preset_file("preset.ftd");
     if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-    //saveini} {}
+    mINI::INIFile fileFTD(fnfc.filename());
+    mINI::INIStructure FTD;
+    pushFTD(&FTD);
+    fileFTD.generate(FTD);
+    log_info("Save data file");} {selected
+  }
 }
 
 Function {callbackMenuitemMinimize(Fl_Menu_* w, void*)} {private return_type void

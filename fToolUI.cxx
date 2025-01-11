@@ -2,6 +2,14 @@
 
 #include "fToolUI.h"
 
+void pushFTD(mINI::INIStructure* fileIni) {
+  printf("Hello, World!\n");
+}
+
+void pullFTD(mINI::INIStructure* fileIni) {
+  printf("Hello, World!\n");
+}
+
 static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
   Fl_Native_File_Chooser fnfc;
       fnfc.title("选择数据文件");
@@ -9,7 +17,11 @@ static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
       fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
       fnfc.filter("fTool Data File\t*.ftd\n");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-      //readini
+      log_info("Select data file");
+      mINI::INIFile fileFTD(fnfc.filename());
+      mINI::INIStructure FTD;
+      fileFTD.read(FTD);
+      pullFTD(&FTD);
 }
 
 static void callbackMenuitemFilesave(Fl_Menu_* w, void*) {
@@ -20,7 +32,11 @@ static void callbackMenuitemFilesave(Fl_Menu_* w, void*) {
       fnfc.filter("fTool Data File\t*.ftd\n");
       fnfc.preset_file("preset.ftd");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-      //saveini
+      mINI::INIFile fileFTD(fnfc.filename());
+      mINI::INIStructure FTD;
+      pushFTD(&FTD);
+      fileFTD.generate(FTD);
+      log_info("Save data file");
 }
 
 static void callbackMenuitemMinimize(Fl_Menu_* w, void*) {
