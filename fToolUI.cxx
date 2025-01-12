@@ -2,13 +2,13 @@
 
 #include "fToolUI.h"
 
-void pushFTD(mINI::INIStructure* fileIni) {
-  printf("Hello, World!\n");
-}
-
-void pullFTD(mINI::INIStructure* fileIni) {
-  printf("Hello, World!\n");
-}
+//void pushFTD(mINI::INIStructure* fileIni) {
+//  printf("Hello, World!\n");
+//}
+//
+//void pullFTD(mINI::INIStructure* fileIni) {
+//  printf("Hello, World!\n");
+//}
 // 分隔符
 
 Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
@@ -22,11 +22,11 @@ static void cb_menuitemFileopen(Fl_Menu_*, void*) {
       fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
       fnfc.filter("fTool Data File\t*.ftd\n");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-      log_info("Select data file");
-      mINI::INIFile fileFTD(fnfc.filename());
-      mINI::INIStructure FTD;
-      fileFTD.read(FTD);
-      pullFTD(&FTD);
+//      log_info("Select data file");
+//      mINI::INIFile fileFTD(fnfc.filename());
+//      mINI::INIStructure FTD;
+//      fileFTD.read(FTD);
+//      pullFTD(&FTD);
 }
 
 static void cb_menuitemFilesave(Fl_Menu_*, void*) {
@@ -37,21 +37,21 @@ static void cb_menuitemFilesave(Fl_Menu_*, void*) {
       fnfc.filter("fTool Data File\t*.ftd\n");
       fnfc.preset_file("preset.ftd");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-      mINI::INIFile fileFTD(fnfc.filename());
-      mINI::INIStructure FTD;
-      pushFTD(&FTD);
-      fileFTD.generate(FTD);
-      log_info("Save data file");
+//      mINI::INIFile fileFTD(fnfc.filename());
+//      mINI::INIStructure FTD;
+//      pushFTD(&FTD);
+//      fileFTD.generate(FTD);
+//      log_info("Save data file");
 }
 
 static void cb_menuitemMinimize(Fl_Menu_*, void*) {
   Fl::belowmouse()->parent()->as_window()->iconize();
-    log_info("window minimize");
+//    log_info("window minimize");
 }
 
 static void cb_menuitemClose(Fl_Menu_*, void*) {
   Fl::hide_all_windows();
-    log_info("window close");
+//    log_info("window close");
 }
 
 Fl_Menu_Item menu_barMain[] = {

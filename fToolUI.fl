@@ -7,10 +7,6 @@ code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
 }
 
-decl {\#include "log.h"
-\#include "ini.h"} {public local
-}
-
 Function {pushFTD(mINI::INIStructure* fileIni)} {open
 } {
   code {printf("Hello, World!\\n");} {}
@@ -21,14 +17,14 @@ Function {pullFTD(mINI::INIStructure* fileIni)} {open return_type void
   code {printf("Hello, World!\\n");} {}
 }
 
-comment {分隔符} {selected in_source in_header
+comment {分隔符} {in_source in_header
 }
 
 Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {1214 310 720 480} type Double color 52 align 16 hide size_range {720 480 720 480}
+    xywh {1306 375 720 480} type Double color 52 align 16 hide size_range {720 480 720 480}
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} color 52
