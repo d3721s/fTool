@@ -8,19 +8,23 @@
 #include "ini.h"
 void pushFTD(mINI::INIStructure* fileIni);
 void pullFTD(mINI::INIStructure* fileIni);
+// 分隔符
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *windowMain;
 #include <FL/Fl_Menu_Bar.H>
 extern Fl_Menu_Bar *barMain;
 #include <cstdlib>
 #include <FL/Fl_Wizard.H>
+extern Fl_Wizard *wizardConnect;
 #include <FL/Fl_Group.H>
 extern Fl_Group *groupConnectSocket;
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Button.H>
+extern Fl_Button *buttonToSerial;
 #include <FL/Fl_Light_Button.H>
 extern Fl_Group *groupConnectSerial;
 #include <FL/Fl_Input_Choice.H>
+extern Fl_Button *buttonToSocket;
 extern Fl_Button *buttonRead;
 extern Fl_Button *buttonCopy;
 extern Fl_Button *buttonWrite;

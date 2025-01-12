@@ -9,8 +9,13 @@ void pushFTD(mINI::INIStructure* fileIni) {
 void pullFTD(mINI::INIStructure* fileIni) {
   printf("Hello, World!\n");
 }
+// 分隔符
 
-static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
+Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
+
+Fl_Menu_Bar *barMain=(Fl_Menu_Bar *)0;
+
+static void cb_menuitemFileopen(Fl_Menu_*, void*) {
   Fl_Native_File_Chooser fnfc;
       fnfc.title("选择数据文件");
       fnfc.type(Fl_Native_File_Chooser::BROWSE_FILE);
@@ -24,7 +29,7 @@ static void callbackMenuitemFileopen(Fl_Menu_* w, void*) {
       pullFTD(&FTD);
 }
 
-static void callbackMenuitemFilesave(Fl_Menu_* w, void*) {
+static void cb_menuitemFilesave(Fl_Menu_*, void*) {
   Fl_Native_File_Chooser fnfc;
       fnfc.title("保存数据文件");
       fnfc.type(Fl_Native_File_Chooser::BROWSE_SAVE_FILE);
@@ -39,31 +44,35 @@ static void callbackMenuitemFilesave(Fl_Menu_* w, void*) {
       log_info("Save data file");
 }
 
-static void callbackMenuitemMinimize(Fl_Menu_* w, void*) {
-  Fl_Window* wd = w->window();
-  wd->iconize();
+static void cb_menuitemMinimize(Fl_Menu_*, void*) {
+  Fl::belowmouse()->parent()->as_window()->iconize();
+    log_info("window minimize");
 }
 
-static void callbackMenuitemClose(Fl_Menu_* w, void*) {
-  Fl_Window* wd = w->window();
-  wd->hide();
+static void cb_menuitemClose(Fl_Menu_*, void*) {
+  Fl::hide_all_windows();
+    log_info("window close");
 }
-
-Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
-
-Fl_Menu_Bar *barMain=(Fl_Menu_Bar *)0;
 
 Fl_Menu_Item menu_barMain[] = {
- {"@fileopen", FL_CONTROL|'o',  (Fl_Callback*)callbackMenuitemFileopen, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@filesave", FL_CONTROL|'s',  (Fl_Callback*)callbackMenuitemFilesave, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@fileopen", FL_CONTROL|'o',  (Fl_Callback*)cb_menuitemFileopen, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@filesave", FL_CONTROL|'s',  (Fl_Callback*)cb_menuitemFilesave, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"                                                                     fTool   "
 "                                                                 ", 0,  0, 0, 1, (uchar)FL_NORMAL_LABEL, 1, 14, 0},
- {"@2>", 0,  (Fl_Callback*)callbackMenuitemMinimize, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@1+", 0,  (Fl_Callback*)callbackMenuitemClose, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@2>", 0,  (Fl_Callback*)cb_menuitemMinimize, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@1+", 0,  (Fl_Callback*)cb_menuitemClose, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Wizard *wizardConnect=(Fl_Wizard *)0;
+
 Fl_Group *groupConnectSocket=(Fl_Group *)0;
+
+Fl_Button *buttonToSerial=(Fl_Button *)0;
+
+static void cb_buttonToSerial(Fl_Button*, void*) {
+  wizardConnect->next();
+}
 
 Fl_Group *groupConnectSerial=(Fl_Group *)0;
 
@@ -73,6 +82,12 @@ Fl_Menu_Item menu_3circle[] = {
  {"460800", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
+
+Fl_Button *buttonToSocket=(Fl_Button *)0;
+
+static void cb_buttonToSocket(Fl_Button*, void*) {
+  wizardConnect->prev();
+}
 
 Fl_Button *buttonRead=(Fl_Button *)0;
 
@@ -94,8 +109,8 @@ Fl_Double_Window* make_window() {
       barMain->color(FL_LIGHT2);
       barMain->menu(menu_barMain);
     } // Fl_Menu_Bar* barMain
-    { Fl_Wizard* o = new Fl_Wizard(15, 45, 195, 160);
-      o->color(FL_GRAY0);
+    { wizardConnect = new Fl_Wizard(15, 45, 195, 160);
+      wizardConnect->color(FL_GRAY0);
       { groupConnectSocket = new Fl_Group(15, 45, 195, 160);
         groupConnectSocket->box(FL_THIN_UP_FRAME);
         groupConnectSocket->color(FL_LIGHT2);
@@ -111,10 +126,11 @@ Fl_Double_Window* make_window() {
           o->labelsize(15);
           o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
         } // Fl_Input* o
-        { Fl_Button* o = new Fl_Button(25, 165, 85, 30, "切换到串口");
-          o->color(FL_LIGHT2);
-          o->labelfont(1);
-        } // Fl_Button* o
+        { buttonToSerial = new Fl_Button(25, 165, 85, 30, "切换到串口");
+          buttonToSerial->color(FL_LIGHT2);
+          buttonToSerial->labelfont(1);
+          buttonToSerial->callback((Fl_Callback*)cb_buttonToSerial);
+        } // Fl_Button* buttonToSerial
         { Fl_Light_Button* o = new Fl_Light_Button(120, 165, 80, 30, "连接");
           o->box(FL_THIN_UP_BOX);
           o->color(FL_LIGHT2);
@@ -143,19 +159,22 @@ Fl_Double_Window* make_window() {
           o->align(Fl_Align(FL_ALIGN_TOP_LEFT));
           o->menu(menu_3circle);
         } // Fl_Input_Choice* o
-        { Fl_Button* o = new Fl_Button(25, 165, 85, 30, "切换套接字");
-          o->color(FL_LIGHT2);
-        } // Fl_Button* o
+        { buttonToSocket = new Fl_Button(25, 165, 85, 30, "切换套接字");
+          buttonToSocket->color(FL_LIGHT2);
+          buttonToSocket->labelfont(1);
+          buttonToSocket->callback((Fl_Callback*)cb_buttonToSocket);
+        } // Fl_Button* buttonToSocket
         { Fl_Light_Button* o = new Fl_Light_Button(120, 165, 80, 30, "打开");
           o->box(FL_THIN_UP_BOX);
           o->color(FL_LIGHT2);
           o->selection_color(FL_GREEN);
+          o->labelfont(1);
           o->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         } // Fl_Light_Button* o
         groupConnectSerial->end();
       } // Fl_Group* groupConnectSerial
-      o->end();
-    } // Fl_Wizard* o
+      wizardConnect->end();
+    } // Fl_Wizard* wizardConnect
     { buttonRead = new Fl_Button(20, 215, 180, 50, "@refresh    一键读取");
       buttonRead->box(FL_THIN_UP_BOX);
       buttonRead->color(FL_LIGHT2);
