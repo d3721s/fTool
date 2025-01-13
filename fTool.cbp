@@ -31,23 +31,12 @@
 			<Add option="-fsingle-precision-constant" />
 			<Add option="-ffast-math" />
 			<Add option="-Wl,-z,norelro" />
+			<Add option="-std=c++14" />
 			<Add option="-DWIN32" />
 			<Add directory="C:/msys64/ucrt64/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-L/ucrt64/lib -static -mwindows -lfltk -lgdiplus -lgdiplus -lole32 -luuid -lcomctl32 -lws2_32 -lwinspool" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_log_setup-mt.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_log-mt.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_date_time-mt.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_date_time-mt.dll.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_filesystem-mt.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_filesystem-mt.dll.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_log_setup-mt.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_log_setup-mt.dll.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_log-mt.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_log-mt.dll.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_thread-mt.a" />
-			<Add library="C:/msys64/ucrt64/lib/libboost_thread-mt.dll.a" />
 			<Add directory="C:/msys64/ucrt64/lib" />
 		</Linker>
 		<Unit filename="fToolUI.cxx" />
