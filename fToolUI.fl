@@ -7,6 +7,9 @@ code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
 }
 
+decl {\#include "ini.h"} {public global
+}
+
 Function {pushFTD(mINI::INIStructure* fileIni)} {open
 } {
   code {printf("Hello, World!\\n");} {}
@@ -24,9 +27,9 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {1306 375 720 480} type Double color 52 align 16 hide size_range {720 480 720 480}
+    xywh {854 328 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
-    Fl_Menu_Bar barMain {open
+    Fl_Menu_Bar barMain {
       xywh {0 0 720 30} color 52
     } {
       MenuItem menuitemFileopen {
@@ -37,7 +40,6 @@ Function {make_window()} {open
     fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
     fnfc.filter("fTool Data File\\t*.ftd\\n");
     if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-    log_info("Select data file");
     mINI::INIFile fileFTD(fnfc.filename());
     mINI::INIStructure FTD;
     fileFTD.read(FTD);
@@ -56,8 +58,7 @@ Function {make_window()} {open
     mINI::INIFile fileFTD(fnfc.filename());
     mINI::INIStructure FTD;
     pushFTD(&FTD);
-    fileFTD.generate(FTD);
-    log_info("Save data file");}
+    fileFTD.generate(FTD);}
         xywh {0 0 100 20} shortcut 0x40073
       }
       MenuItem menuitemTitle {
@@ -66,23 +67,22 @@ Function {make_window()} {open
       }
       MenuItem menuitemMinimize {
         label {@2>}
-        callback {Fl::belowmouse()->parent()->as_window()->iconize();
-  log_info("window minimize");}
+        callback {Fl::belowmouse()->parent()->as_window()->iconize();}
         xywh {0 0 100 20}
       }
       MenuItem menuitemClose {
         label {@1+}
         callback {Fl::hide_all_windows();
-  log_info("window close");}
+std::exit(0);}
         xywh {10 10 100 20}
         code0 {\#include <cstdlib>}
       }
     }
-    Fl_Wizard wizardConnect {open
+    Fl_Wizard wizardConnect {
       xywh {15 45 195 160} color 32
     } {
       Fl_Group groupConnectSocket {open
-        xywh {15 45 195 160} box THIN_UP_FRAME color 52 labeltype NO_LABEL hide
+        xywh {15 45 195 160} box THIN_UP_FRAME color 52 labeltype NO_LABEL
       } {
         Fl_Input {} {
           label {@-3circle  远程主机地址}
@@ -103,7 +103,7 @@ Function {make_window()} {open
         }
       }
       Fl_Group groupConnectSerial {open
-        xywh {15 45 195 160} box THIN_UP_FRAME color 52 labeltype NO_LABEL
+        xywh {15 45 195 160} box THIN_UP_FRAME color 52 labeltype NO_LABEL hide
       } {
         Fl_Input_Choice {} {
           label {@-3circle  端口}
@@ -138,26 +138,154 @@ Function {make_window()} {open
       }
     }
     Fl_Button buttonRead {
-      label {@refresh    一键读取}
+      label {@refresh    读取所有参数}
       xywh {20 215 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Button buttonCopy {
-      label {@filenew    复制参数}
+      label {@filenew    复制所有参数}
       xywh {20 275 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Button buttonWrite {
-      label {@2->|    一键写入}
+      label {@2->|    写入所有参数}
       xywh {20 335 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Button buttonCustom {
       label {@<->    自定义按钮1}
       xywh {20 395 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
-    Fl_Group groupRead {open
-      xywh {220 45 485 205} box THIN_UP_FRAME
-    } {}
-    Fl_Group groupWrite {open
-      xywh {220 260 485 205} box THIN_UP_FRAME
-    } {}
+    Fl_Wizard wizardRead {open
+      xywh {220 45 485 185} color 52
+    } {
+      Fl_Group valueP0Read {
+        label P0 open
+        xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17 hide
+      } {
+        Fl_Output {} {
+          label {P0-00}
+          xywh {270 75 100 30}
+        }
+        Fl_Output {} {
+          label {P0-01}
+          xywh {430 75 100 30}
+        }
+        Fl_Output {} {
+          label {P0-02}
+          xywh {590 75 100 30}
+        }
+        Fl_Output {} {
+          label {P0-03}
+          xywh {270 120 100 30}
+        }
+        Fl_Output {} {
+          label {P0-04}
+          xywh {430 120 100 30}
+        }
+        Fl_Output {} {
+          label {P0-05}
+          xywh {590 120 100 30}
+        }
+        Fl_Output {} {
+          label {P0-06}
+          xywh {270 165 100 30}
+        }
+      }
+      Fl_Group valueP1Read0 {
+        label {P1-00 ~ P1-08} open
+        xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17 hide
+      } {
+        Fl_Output {} {
+          label {P1-00}
+          xywh {260 75 100 30}
+        }
+        Fl_Output {} {
+          label {P1-01}
+          xywh {420 75 100 30}
+        }
+        Fl_Output {} {
+          label {P1-02}
+          xywh {580 75 100 30}
+        }
+        Fl_Output {} {
+          label {P1-03}
+          xywh {260 120 100 30}
+        }
+        Fl_Output {} {
+          label {P1-04}
+          xywh {420 120 100 30}
+        }
+        Fl_Output {} {
+          label {P1-05}
+          xywh {580 120 100 30}
+        }
+        Fl_Output {} {
+          label {P1-06}
+          xywh {260 165 100 30}
+        }
+        Fl_Output {} {
+          label {P1-07}
+          xywh {420 165 100 30}
+        }
+        Fl_Output {} {
+          label {P1-08}
+          xywh {580 165 100 30}
+        }
+      }
+      Fl_Group valueP1Read1 {
+        label {P1-09 ~ P1-17} open selected
+        xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17
+      } {
+        Fl_Output {} {
+          label {P1-00}
+          xywh {270 85 100 30}
+        }
+        Fl_Output {} {
+          label {P1-01}
+          xywh {430 85 100 30}
+        }
+        Fl_Output {} {
+          label {P1-02}
+          xywh {590 85 100 30}
+        }
+        Fl_Output {} {
+          label {P1-03}
+          xywh {270 130 100 30}
+        }
+        Fl_Output {} {
+          label {P1-04}
+          xywh {430 130 100 30}
+        }
+        Fl_Output {} {
+          label {P1-05}
+          xywh {590 130 100 30}
+        }
+        Fl_Output {} {
+          label {P1-06}
+          xywh {270 175 100 30}
+        }
+        Fl_Output {} {
+          label {P1-07}
+          xywh {430 175 100 30}
+        }
+        Fl_Output {} {
+          label {P1-08}
+          xywh {590 175 100 30}
+        }
+      }
+    }
+    Fl_Wizard wizardWrite {open
+      xywh {220 280 485 185} color 52
+    } {
+      Fl_Group valueP0Write {open
+        xywh {220 280 485 185} box THIN_UP_FRAME color 52
+      } {}
+    }
+    Fl_Button {} {
+      label {上一页}
+      xywh {220 235 100 40} box THIN_UP_BOX color 52 labelfont 1
+    }
+    Fl_Button {} {
+      label {下一页}
+      xywh {605 235 100 40} box THIN_UP_BOX color 52 labelfont 1
+    }
   }
 }

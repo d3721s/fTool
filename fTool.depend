@@ -14530,12 +14530,13 @@
 	<boost/log/detail/header.hpp>
 	<boost/log/detail/footer.hpp>
 
-1736728250 source:c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.cxx
+1736748059 source:c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.cxx
 	"fToolUI.h"
 
-1736728250 c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.h
+1736747618 c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Native_File_Chooser.H>
+	"ini.h"
 	<FL/Fl_Double_Window.H>
 	<FL/Fl_Menu_Bar.H>
 	<cstdlib>
@@ -14545,21 +14546,28 @@
 	<FL/Fl_Button.H>
 	<FL/Fl_Light_Button.H>
 	<FL/Fl_Input_Choice.H>
+	<FL/Fl_Output.H>
 
-1736730828 source:c:\users\lenovo\desktop\ws\ftool\ftool\main.cpp
+1736746035 source:c:\users\lenovo\desktop\ws\ftool\ftool\main.cpp
 	<iostream>
-	<pthread.h>
 	<thread>
 	<chrono>
 	<windows.h>
-	<boost/log/core.hpp>
-	<boost/log/trivial.hpp>
-	<boost/log/expressions.hpp>
-	<boost/log/sinks/text_file_backend.hpp>
-	<boost/log/utility/setup/file.hpp>
-	<boost/log/utility/setup/common_attributes.hpp>
-	<boost/log/sources/severity_logger.hpp>
-	<boost/log/sources/record_ostream.hpp>
 	<FL/Fl.H>
 	"fToolUI.h"
+
+1727728356 c:\users\lenovo\desktop\ws\ftool\ftool\ini.h
+	<string>
+	<sstream>
+	<algorithm>
+	<utility>
+	<unordered_map>
+	<vector>
+	<memory>
+	<fstream>
+	<sys/stat.h>
+	<cctype>
+
+1736389591 c:\msys64\ucrt64\include\fl\fl_output.h
+	"Fl_Input.H"
 

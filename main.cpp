@@ -2,9 +2,7 @@
 #include <thread>
 #include <chrono>
 #include <windows.h>
-
 #include <FL/Fl.H>
-
 #include "fToolUI.h"
 
 void startThreadUI(void);
@@ -24,6 +22,7 @@ void startThreadUI(void)
     windowMain->show();
     Fl::run();
 }
+
 void startThreadMain(void)
 {
     while(1)

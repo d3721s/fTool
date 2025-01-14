@@ -2,13 +2,13 @@
 
 #include "fToolUI.h"
 
-//void pushFTD(mINI::INIStructure* fileIni) {
-//  printf("Hello, World!\n");
-//}
-//
-//void pullFTD(mINI::INIStructure* fileIni) {
-//  printf("Hello, World!\n");
-//}
+void pushFTD(mINI::INIStructure* fileIni) {
+  printf("Hello, World!\n");
+}
+
+void pullFTD(mINI::INIStructure* fileIni) {
+  printf("Hello, World!\n");
+}
 // 分隔符
 
 Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
@@ -22,11 +22,10 @@ static void cb_menuitemFileopen(Fl_Menu_*, void*) {
       fnfc.options(Fl_Native_File_Chooser::USE_FILTER_EXT);
       fnfc.filter("fTool Data File\t*.ftd\n");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-//      log_info("Select data file");
-//      mINI::INIFile fileFTD(fnfc.filename());
-//      mINI::INIStructure FTD;
-//      fileFTD.read(FTD);
-//      pullFTD(&FTD);
+      mINI::INIFile fileFTD(fnfc.filename());
+      mINI::INIStructure FTD;
+      fileFTD.read(FTD);
+      pullFTD(&FTD);
 }
 
 static void cb_menuitemFilesave(Fl_Menu_*, void*) {
@@ -37,21 +36,19 @@ static void cb_menuitemFilesave(Fl_Menu_*, void*) {
       fnfc.filter("fTool Data File\t*.ftd\n");
       fnfc.preset_file("preset.ftd");
       if ((fnfc.show() != 0) ||(!fnfc.filename())) return;
-//      mINI::INIFile fileFTD(fnfc.filename());
-//      mINI::INIStructure FTD;
-//      pushFTD(&FTD);
-//      fileFTD.generate(FTD);
-//      log_info("Save data file");
+      mINI::INIFile fileFTD(fnfc.filename());
+      mINI::INIStructure FTD;
+      pushFTD(&FTD);
+      fileFTD.generate(FTD);
 }
 
 static void cb_menuitemMinimize(Fl_Menu_*, void*) {
   Fl::belowmouse()->parent()->as_window()->iconize();
-//    log_info("window minimize");
 }
 
 static void cb_menuitemClose(Fl_Menu_*, void*) {
   Fl::hide_all_windows();
-//    log_info("window close");
+  std::exit(0);
 }
 
 Fl_Menu_Item menu_barMain[] = {
@@ -97,9 +94,17 @@ Fl_Button *buttonWrite=(Fl_Button *)0;
 
 Fl_Button *buttonCustom=(Fl_Button *)0;
 
-Fl_Group *groupRead=(Fl_Group *)0;
+Fl_Wizard *wizardRead=(Fl_Wizard *)0;
 
-Fl_Group *groupWrite=(Fl_Group *)0;
+Fl_Group *valueP0Read=(Fl_Group *)0;
+
+Fl_Group *valueP1Read0=(Fl_Group *)0;
+
+Fl_Group *valueP1Read1=(Fl_Group *)0;
+
+Fl_Wizard *wizardWrite=(Fl_Wizard *)0;
+
+Fl_Group *valueP0Write=(Fl_Group *)0;
 
 Fl_Double_Window* make_window() {
   { windowMain = new Fl_Double_Window(720, 480, "fTool");
@@ -115,7 +120,6 @@ Fl_Double_Window* make_window() {
         groupConnectSocket->box(FL_THIN_UP_FRAME);
         groupConnectSocket->color(FL_LIGHT2);
         groupConnectSocket->labeltype(FL_NO_LABEL);
-        groupConnectSocket->hide();
         { Fl_Input* o = new Fl_Input(25, 70, 175, 30, "@-3circle  远程主机地址");
           o->labelfont(1);
           o->labelsize(15);
@@ -144,6 +148,7 @@ Fl_Double_Window* make_window() {
         groupConnectSerial->box(FL_THIN_UP_FRAME);
         groupConnectSerial->color(FL_LIGHT2);
         groupConnectSerial->labeltype(FL_NO_LABEL);
+        groupConnectSerial->hide();
         { Fl_Input_Choice* o = new Fl_Input_Choice(25, 70, 175, 30, "@-3circle  端口");
           o->color(FL_LIGHT2);
           o->selection_color(FL_LIGHT2);
@@ -175,17 +180,17 @@ Fl_Double_Window* make_window() {
       } // Fl_Group* groupConnectSerial
       wizardConnect->end();
     } // Fl_Wizard* wizardConnect
-    { buttonRead = new Fl_Button(20, 215, 180, 50, "@refresh    一键读取");
+    { buttonRead = new Fl_Button(20, 215, 180, 50, "@refresh    读取所有参数");
       buttonRead->box(FL_THIN_UP_BOX);
       buttonRead->color(FL_LIGHT2);
       buttonRead->labelfont(1);
     } // Fl_Button* buttonRead
-    { buttonCopy = new Fl_Button(20, 275, 180, 50, "@filenew    复制参数");
+    { buttonCopy = new Fl_Button(20, 275, 180, 50, "@filenew    复制所有参数");
       buttonCopy->box(FL_THIN_UP_BOX);
       buttonCopy->color(FL_LIGHT2);
       buttonCopy->labelfont(1);
     } // Fl_Button* buttonCopy
-    { buttonWrite = new Fl_Button(20, 335, 180, 50, "@2->|    一键写入");
+    { buttonWrite = new Fl_Button(20, 335, 180, 50, "@2->|    写入所有参数");
       buttonWrite->box(FL_THIN_UP_BOX);
       buttonWrite->color(FL_LIGHT2);
       buttonWrite->labelfont(1);
@@ -195,14 +200,105 @@ Fl_Double_Window* make_window() {
       buttonCustom->color(FL_LIGHT2);
       buttonCustom->labelfont(1);
     } // Fl_Button* buttonCustom
-    { groupRead = new Fl_Group(220, 45, 485, 205);
-      groupRead->box(FL_THIN_UP_FRAME);
-      groupRead->end();
-    } // Fl_Group* groupRead
-    { groupWrite = new Fl_Group(220, 260, 485, 205);
-      groupWrite->box(FL_THIN_UP_FRAME);
-      groupWrite->end();
-    } // Fl_Group* groupWrite
+    { wizardRead = new Fl_Wizard(220, 45, 485, 185);
+      wizardRead->color(FL_LIGHT2);
+      { valueP0Read = new Fl_Group(220, 45, 485, 185, "P0");
+        valueP0Read->box(FL_THIN_UP_FRAME);
+        valueP0Read->color(FL_LIGHT2);
+        valueP0Read->labelfont(1);
+        valueP0Read->labelsize(20);
+        valueP0Read->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
+        valueP0Read->hide();
+        { new Fl_Output(270, 75, 100, 30, "P0-00");
+        } // Fl_Output* o
+        { new Fl_Output(430, 75, 100, 30, "P0-01");
+        } // Fl_Output* o
+        { new Fl_Output(590, 75, 100, 30, "P0-02");
+        } // Fl_Output* o
+        { new Fl_Output(270, 120, 100, 30, "P0-03");
+        } // Fl_Output* o
+        { new Fl_Output(430, 120, 100, 30, "P0-04");
+        } // Fl_Output* o
+        { new Fl_Output(590, 120, 100, 30, "P0-05");
+        } // Fl_Output* o
+        { new Fl_Output(270, 165, 100, 30, "P0-06");
+        } // Fl_Output* o
+        valueP0Read->end();
+      } // Fl_Group* valueP0Read
+      { valueP1Read0 = new Fl_Group(220, 45, 485, 185, "P1-00 ~ P1-08");
+        valueP1Read0->box(FL_THIN_UP_FRAME);
+        valueP1Read0->color(FL_LIGHT2);
+        valueP1Read0->labelfont(1);
+        valueP1Read0->labelsize(20);
+        valueP1Read0->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
+        valueP1Read0->hide();
+        { new Fl_Output(260, 75, 100, 30, "P1-00");
+        } // Fl_Output* o
+        { new Fl_Output(420, 75, 100, 30, "P1-01");
+        } // Fl_Output* o
+        { new Fl_Output(580, 75, 100, 30, "P1-02");
+        } // Fl_Output* o
+        { new Fl_Output(260, 120, 100, 30, "P1-03");
+        } // Fl_Output* o
+        { new Fl_Output(420, 120, 100, 30, "P1-04");
+        } // Fl_Output* o
+        { new Fl_Output(580, 120, 100, 30, "P1-05");
+        } // Fl_Output* o
+        { new Fl_Output(260, 165, 100, 30, "P1-06");
+        } // Fl_Output* o
+        { new Fl_Output(420, 165, 100, 30, "P1-07");
+        } // Fl_Output* o
+        { new Fl_Output(580, 165, 100, 30, "P1-08");
+        } // Fl_Output* o
+        valueP1Read0->end();
+      } // Fl_Group* valueP1Read0
+      { valueP1Read1 = new Fl_Group(220, 45, 485, 185, "P1-09 ~ P1-17");
+        valueP1Read1->box(FL_THIN_UP_FRAME);
+        valueP1Read1->color(FL_LIGHT2);
+        valueP1Read1->labelfont(1);
+        valueP1Read1->labelsize(20);
+        valueP1Read1->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
+        { new Fl_Output(270, 85, 100, 30, "P1-00");
+        } // Fl_Output* o
+        { new Fl_Output(430, 85, 100, 30, "P1-01");
+        } // Fl_Output* o
+        { new Fl_Output(590, 85, 100, 30, "P1-02");
+        } // Fl_Output* o
+        { new Fl_Output(270, 130, 100, 30, "P1-03");
+        } // Fl_Output* o
+        { new Fl_Output(430, 130, 100, 30, "P1-04");
+        } // Fl_Output* o
+        { new Fl_Output(590, 130, 100, 30, "P1-05");
+        } // Fl_Output* o
+        { new Fl_Output(270, 175, 100, 30, "P1-06");
+        } // Fl_Output* o
+        { new Fl_Output(430, 175, 100, 30, "P1-07");
+        } // Fl_Output* o
+        { new Fl_Output(590, 175, 100, 30, "P1-08");
+        } // Fl_Output* o
+        valueP1Read1->end();
+      } // Fl_Group* valueP1Read1
+      wizardRead->end();
+    } // Fl_Wizard* wizardRead
+    { wizardWrite = new Fl_Wizard(220, 280, 485, 185);
+      wizardWrite->color(FL_LIGHT2);
+      { valueP0Write = new Fl_Group(220, 280, 485, 185);
+        valueP0Write->box(FL_THIN_UP_FRAME);
+        valueP0Write->color(FL_LIGHT2);
+        valueP0Write->end();
+      } // Fl_Group* valueP0Write
+      wizardWrite->end();
+    } // Fl_Wizard* wizardWrite
+    { Fl_Button* o = new Fl_Button(220, 235, 100, 40, "上一页");
+      o->box(FL_THIN_UP_BOX);
+      o->color(FL_LIGHT2);
+      o->labelfont(1);
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(605, 235, 100, 40, "下一页");
+      o->box(FL_THIN_UP_BOX);
+      o->color(FL_LIGHT2);
+      o->labelfont(1);
+    } // Fl_Button* o
     windowMain->size_range(720, 480, 720, 480);
     windowMain->end();
   } // Fl_Double_Window* windowMain
