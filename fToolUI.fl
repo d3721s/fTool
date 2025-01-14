@@ -27,9 +27,9 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {864 295 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
+    xywh {392 285 720 480} type Double color 52 align 16 hide size_range {720 480 720 480}
   } {
-    Fl_Menu_Bar barMain {open
+    Fl_Menu_Bar barMain {
       xywh {0 0 720 30} color 52
     } {
       MenuItem menuitemFileopen {
@@ -72,7 +72,7 @@ Function {make_window()} {open
       }
       MenuItem menuitemClose {
         label {@1+}
-        callback {std::exit(0);} selected
+        callback {std::exit(0);}
         xywh {10 10 100 20}
         code0 {\#include <cstdlib>}
       }
@@ -157,11 +157,11 @@ Function {make_window()} {open
     } {
       Fl_Group valueP0Read {
         label P0 open
-        xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17 hide
+        xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17
       } {
         Fl_Output {} {
-          label {P0-00}
-          xywh {270 75 100 30}
+          label {P0-00} selected
+          tooltip {P0-00	电机额定电流	0.10~10.00A	1.10	一直} xywh {270 75 100 30}
         }
         Fl_Output {} {
           label {P0-01}
@@ -231,7 +231,7 @@ Function {make_window()} {open
       }
       Fl_Group valueP1Read1 {
         label {P1-09 ~ P1-17} open
-        xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17
+        xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17 hide
       } {
         Fl_Output {} {
           label {P1-09}

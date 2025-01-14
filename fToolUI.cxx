@@ -207,8 +207,8 @@ Fl_Double_Window* make_window() {
         valueP0Read->labelfont(1);
         valueP0Read->labelsize(20);
         valueP0Read->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
-        valueP0Read->hide();
-        { new Fl_Output(270, 75, 100, 30, "P0-00");
+        { Fl_Output* o = new Fl_Output(270, 75, 100, 30, "P0-00");
+          o->tooltip("P0-00\t电机额定电流\t0.10~10.00A\t1.10\t一直");
         } // Fl_Output* o
         { new Fl_Output(430, 75, 100, 30, "P0-01");
         } // Fl_Output* o
@@ -257,6 +257,7 @@ Fl_Double_Window* make_window() {
         valueP1Read1->labelfont(1);
         valueP1Read1->labelsize(20);
         valueP1Read1->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
+        valueP1Read1->hide();
         { new Fl_Output(270, 85, 100, 30, "P1-09");
         } // Fl_Output* o
         { new Fl_Output(430, 85, 100, 30, "P1-10");
