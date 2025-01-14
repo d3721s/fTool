@@ -47,7 +47,6 @@ static void cb_menuitemMinimize(Fl_Menu_*, void*) {
 }
 
 static void cb_menuitemClose(Fl_Menu_*, void*) {
-  Fl::hide_all_windows();
   std::exit(0);
 }
 
@@ -258,23 +257,23 @@ Fl_Double_Window* make_window() {
         valueP1Read1->labelfont(1);
         valueP1Read1->labelsize(20);
         valueP1Read1->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
-        { new Fl_Output(270, 85, 100, 30, "P1-00");
+        { new Fl_Output(270, 85, 100, 30, "P1-09");
         } // Fl_Output* o
-        { new Fl_Output(430, 85, 100, 30, "P1-01");
+        { new Fl_Output(430, 85, 100, 30, "P1-10");
         } // Fl_Output* o
-        { new Fl_Output(590, 85, 100, 30, "P1-02");
+        { new Fl_Output(590, 85, 100, 30, "P1-11");
         } // Fl_Output* o
-        { new Fl_Output(270, 130, 100, 30, "P1-03");
+        { new Fl_Output(270, 130, 100, 30, "P1-12");
         } // Fl_Output* o
-        { new Fl_Output(430, 130, 100, 30, "P1-04");
+        { new Fl_Output(430, 130, 100, 30, "P1-13");
         } // Fl_Output* o
-        { new Fl_Output(590, 130, 100, 30, "P1-05");
+        { new Fl_Output(590, 130, 100, 30, "P1-14");
         } // Fl_Output* o
-        { new Fl_Output(270, 175, 100, 30, "P1-06");
+        { new Fl_Output(270, 175, 100, 30, "P1-15");
         } // Fl_Output* o
-        { new Fl_Output(430, 175, 100, 30, "P1-07");
+        { new Fl_Output(430, 175, 100, 30, "P1-16");
         } // Fl_Output* o
-        { new Fl_Output(590, 175, 100, 30, "P1-08");
+        { new Fl_Output(590, 175, 100, 30, "P1-17");
         } // Fl_Output* o
         valueP1Read1->end();
       } // Fl_Group* valueP1Read1

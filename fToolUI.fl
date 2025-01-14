@@ -27,9 +27,9 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {854 328 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
+    xywh {864 295 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
-    Fl_Menu_Bar barMain {
+    Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} color 52
     } {
       MenuItem menuitemFileopen {
@@ -72,8 +72,7 @@ Function {make_window()} {open
       }
       MenuItem menuitemClose {
         label {@1+}
-        callback {Fl::hide_all_windows();
-std::exit(0);}
+        callback {std::exit(0);} selected
         xywh {10 10 100 20}
         code0 {\#include <cstdlib>}
       }
@@ -231,43 +230,43 @@ std::exit(0);}
         }
       }
       Fl_Group valueP1Read1 {
-        label {P1-09 ~ P1-17} open selected
+        label {P1-09 ~ P1-17} open
         xywh {220 45 485 185} box THIN_UP_FRAME color 52 labelfont 1 labelsize 20 align 17
       } {
         Fl_Output {} {
-          label {P1-00}
+          label {P1-09}
           xywh {270 85 100 30}
         }
         Fl_Output {} {
-          label {P1-01}
+          label {P1-10}
           xywh {430 85 100 30}
         }
         Fl_Output {} {
-          label {P1-02}
+          label {P1-11}
           xywh {590 85 100 30}
         }
         Fl_Output {} {
-          label {P1-03}
+          label {P1-12}
           xywh {270 130 100 30}
         }
         Fl_Output {} {
-          label {P1-04}
+          label {P1-13}
           xywh {430 130 100 30}
         }
         Fl_Output {} {
-          label {P1-05}
+          label {P1-14}
           xywh {590 130 100 30}
         }
         Fl_Output {} {
-          label {P1-06}
+          label {P1-15}
           xywh {270 175 100 30}
         }
         Fl_Output {} {
-          label {P1-07}
+          label {P1-16}
           xywh {430 175 100 30}
         }
         Fl_Output {} {
-          label {P1-08}
+          label {P1-17}
           xywh {590 175 100 30}
         }
       }
