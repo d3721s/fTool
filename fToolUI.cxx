@@ -52,9 +52,9 @@ static void cb_menuitemClose(Fl_Menu_*, void*) {
 
 Fl_Menu_Item menu_barMain[] = {
  {"@fileopen", FL_CONTROL|'o',  (Fl_Callback*)cb_menuitemFileopen, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"@filesave", FL_CONTROL|'s',  (Fl_Callback*)cb_menuitemFilesave, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"@filesave", FL_CONTROL|'s',  (Fl_Callback*)cb_menuitemFilesave, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"                                                                     fTool   "
-"                                                                 ", 0,  0, 0, 1, (uchar)FL_NORMAL_LABEL, 1, 14, 0},
+"                                                                 ", 0,  0, 0, 129, (uchar)FL_NORMAL_LABEL, 1, 14, 0},
  {"@2>", 0,  (Fl_Callback*)cb_menuitemMinimize, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"@1+", 0,  (Fl_Callback*)cb_menuitemClose, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
@@ -93,23 +93,12 @@ Fl_Button *buttonWrite=(Fl_Button *)0;
 
 Fl_Button *buttonCustom=(Fl_Button *)0;
 
-Fl_Wizard *wizardRead=(Fl_Wizard *)0;
-
-Fl_Group *valueP0Read=(Fl_Group *)0;
-
-Fl_Group *valueP1Read0=(Fl_Group *)0;
-
-Fl_Group *valueP1Read1=(Fl_Group *)0;
-
-Fl_Wizard *wizardWrite=(Fl_Wizard *)0;
-
-Fl_Group *valueP0Write=(Fl_Group *)0;
-
 Fl_Double_Window* make_window() {
   { windowMain = new Fl_Double_Window(720, 480, "fTool");
     windowMain->color(FL_LIGHT2);
     windowMain->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
     { barMain = new Fl_Menu_Bar(0, 0, 720, 30);
+      barMain->box(FL_THIN_UP_BOX);
       barMain->color(FL_LIGHT2);
       barMain->menu(menu_barMain);
     } // Fl_Menu_Bar* barMain
@@ -199,107 +188,24 @@ Fl_Double_Window* make_window() {
       buttonCustom->color(FL_LIGHT2);
       buttonCustom->labelfont(1);
     } // Fl_Button* buttonCustom
-    { wizardRead = new Fl_Wizard(220, 45, 485, 185);
-      wizardRead->color(FL_LIGHT2);
-      { valueP0Read = new Fl_Group(220, 45, 485, 185, "P0");
-        valueP0Read->box(FL_THIN_UP_FRAME);
-        valueP0Read->color(FL_LIGHT2);
-        valueP0Read->labelfont(1);
-        valueP0Read->labelsize(20);
-        valueP0Read->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
-        { Fl_Output* o = new Fl_Output(270, 75, 100, 30, "P0-00");
-          o->tooltip("P0-00\t电机额定电流\t0.10~10.00A\t1.10\t一直");
-        } // Fl_Output* o
-        { new Fl_Output(430, 75, 100, 30, "P0-01");
-        } // Fl_Output* o
-        { new Fl_Output(590, 75, 100, 30, "P0-02");
-        } // Fl_Output* o
-        { new Fl_Output(270, 120, 100, 30, "P0-03");
-        } // Fl_Output* o
-        { new Fl_Output(430, 120, 100, 30, "P0-04");
-        } // Fl_Output* o
-        { new Fl_Output(590, 120, 100, 30, "P0-05");
-        } // Fl_Output* o
-        { new Fl_Output(270, 165, 100, 30, "P0-06");
-        } // Fl_Output* o
-        valueP0Read->end();
-      } // Fl_Group* valueP0Read
-      { valueP1Read0 = new Fl_Group(220, 45, 485, 185, "P1-00 ~ P1-08");
-        valueP1Read0->box(FL_THIN_UP_FRAME);
-        valueP1Read0->color(FL_LIGHT2);
-        valueP1Read0->labelfont(1);
-        valueP1Read0->labelsize(20);
-        valueP1Read0->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
-        valueP1Read0->hide();
-        { new Fl_Output(260, 75, 100, 30, "P1-00");
-        } // Fl_Output* o
-        { new Fl_Output(420, 75, 100, 30, "P1-01");
-        } // Fl_Output* o
-        { new Fl_Output(580, 75, 100, 30, "P1-02");
-        } // Fl_Output* o
-        { new Fl_Output(260, 120, 100, 30, "P1-03");
-        } // Fl_Output* o
-        { new Fl_Output(420, 120, 100, 30, "P1-04");
-        } // Fl_Output* o
-        { new Fl_Output(580, 120, 100, 30, "P1-05");
-        } // Fl_Output* o
-        { new Fl_Output(260, 165, 100, 30, "P1-06");
-        } // Fl_Output* o
-        { new Fl_Output(420, 165, 100, 30, "P1-07");
-        } // Fl_Output* o
-        { new Fl_Output(580, 165, 100, 30, "P1-08");
-        } // Fl_Output* o
-        valueP1Read0->end();
-      } // Fl_Group* valueP1Read0
-      { valueP1Read1 = new Fl_Group(220, 45, 485, 185, "P1-09 ~ P1-17");
-        valueP1Read1->box(FL_THIN_UP_FRAME);
-        valueP1Read1->color(FL_LIGHT2);
-        valueP1Read1->labelfont(1);
-        valueP1Read1->labelsize(20);
-        valueP1Read1->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
-        valueP1Read1->hide();
-        { new Fl_Output(270, 85, 100, 30, "P1-09");
-        } // Fl_Output* o
-        { new Fl_Output(430, 85, 100, 30, "P1-10");
-        } // Fl_Output* o
-        { new Fl_Output(590, 85, 100, 30, "P1-11");
-        } // Fl_Output* o
-        { new Fl_Output(270, 130, 100, 30, "P1-12");
-        } // Fl_Output* o
-        { new Fl_Output(430, 130, 100, 30, "P1-13");
-        } // Fl_Output* o
-        { new Fl_Output(590, 130, 100, 30, "P1-14");
-        } // Fl_Output* o
-        { new Fl_Output(270, 175, 100, 30, "P1-15");
-        } // Fl_Output* o
-        { new Fl_Output(430, 175, 100, 30, "P1-16");
-        } // Fl_Output* o
-        { new Fl_Output(590, 175, 100, 30, "P1-17");
-        } // Fl_Output* o
-        valueP1Read1->end();
-      } // Fl_Group* valueP1Read1
-      wizardRead->end();
-    } // Fl_Wizard* wizardRead
-    { wizardWrite = new Fl_Wizard(220, 280, 485, 185);
-      wizardWrite->color(FL_LIGHT2);
-      { valueP0Write = new Fl_Group(220, 280, 485, 185);
-        valueP0Write->box(FL_THIN_UP_FRAME);
-        valueP0Write->color(FL_LIGHT2);
-        valueP0Write->end();
-      } // Fl_Group* valueP0Write
-      wizardWrite->end();
-    } // Fl_Wizard* wizardWrite
-    { Fl_Button* o = new Fl_Button(220, 235, 100, 40, "上一页");
-      o->box(FL_THIN_UP_BOX);
+    { Fl_Table* o = new Fl_Table(220, 45, 485, 420, "参数列表");
+      o->box(FL_THIN_UP_FRAME);
       o->color(FL_LIGHT2);
+      o->labeltype(FL_NO_LABEL);
       o->labelfont(1);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(605, 235, 100, 40, "下一页");
-      o->box(FL_THIN_UP_BOX);
-      o->color(FL_LIGHT2);
-      o->labelfont(1);
-    } // Fl_Button* o
-    windowMain->size_range(720, 480, 720, 480);
+      o->labelsize(15);
+      o->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+      { new Fl_Button(261, 64, 78, 22, "Button");
+      } // Fl_Button* o
+      { new Fl_Light_Button(339, 64, 78, 22, "Button");
+      } // Fl_Light_Button* o
+      { Fl_Output* o = new Fl_Output(420, 64, 84, 20, "output:");
+        o->labeltype(FL_NO_LABEL);
+      } // Fl_Output* o
+      o->end();
+      Fl_Group::current()->resizable(o);
+    } // Fl_Table* o
+    windowMain->size_range(720, 480);
     windowMain->end();
   } // Fl_Double_Window* windowMain
   return windowMain;

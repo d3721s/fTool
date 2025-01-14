@@ -14533,7 +14533,7 @@
 1736821362 source:c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.cxx
 	"fToolUI.h"
 
-1736821362 c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.h
+1736824753 c:\users\lenovo\desktop\ws\ftool\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Native_File_Chooser.H>
 	"ini.h"
@@ -14546,6 +14546,7 @@
 	<FL/Fl_Button.H>
 	<FL/Fl_Light_Button.H>
 	<FL/Fl_Input_Choice.H>
+	<FL/Fl_Table.H>
 	<FL/Fl_Output.H>
 
 1736746035 source:c:\users\lenovo\desktop\ws\ftool\ftool\main.cpp
@@ -14570,4 +14571,13 @@
 
 1736389591 c:\msys64\ucrt64\include\fl\fl_output.h
 	"Fl_Input.H"
+
+1736389593 c:\msys64\ucrt64\include\fl\fl_table.h
+	<FL/Fl_Group.H>
+	<FL/Fl_Scroll.H>
+	<vector>
+
+1736389592 c:\msys64\ucrt64\include\fl\fl_scroll.h
+	"Fl_Group.H"
+	"Fl_Scrollbar.H"
 

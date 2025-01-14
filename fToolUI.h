@@ -28,13 +28,8 @@ extern Fl_Button *buttonRead;
 extern Fl_Button *buttonCopy;
 extern Fl_Button *buttonWrite;
 extern Fl_Button *buttonCustom;
-extern Fl_Wizard *wizardRead;
-extern Fl_Group *valueP0Read;
+#include <FL/Fl_Table.H>
 #include <FL/Fl_Output.H>
-extern Fl_Group *valueP1Read0;
-extern Fl_Group *valueP1Read1;
-extern Fl_Wizard *wizardWrite;
-extern Fl_Group *valueP0Write;
 Fl_Double_Window* make_window();
 extern Fl_Menu_Item menu_barMain[];
 #define menuitemFileopen (menu_barMain+0)
