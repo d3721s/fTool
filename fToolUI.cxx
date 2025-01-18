@@ -87,6 +87,10 @@ static void cb_buttonToSocket(Fl_Button*, void*) {
 
 Fl_Button *buttonRead=(Fl_Button *)0;
 
+static void cb_buttonRead(Fl_Button*, void*) {
+  fl_message("连接后自动读取参数，无需手动读取");
+}
+
 Fl_Button *buttonCopy=(Fl_Button *)0;
 
 Fl_Button *buttonWrite=(Fl_Button *)0;
@@ -172,6 +176,7 @@ Fl_Double_Window* make_window() {
       buttonRead->box(FL_THIN_UP_BOX);
       buttonRead->color(FL_LIGHT2);
       buttonRead->labelfont(1);
+      buttonRead->callback((Fl_Callback*)cb_buttonRead);
     } // Fl_Button* buttonRead
     { buttonCopy = new Fl_Button(20, 275, 180, 50, "@filenew    复制所有参数");
       buttonCopy->box(FL_THIN_UP_BOX);
@@ -195,13 +200,6 @@ Fl_Double_Window* make_window() {
       o->labelfont(1);
       o->labelsize(15);
       o->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-      { new Fl_Button(261, 64, 78, 22, "Button");
-      } // Fl_Button* o
-      { new Fl_Light_Button(339, 64, 78, 22, "Button");
-      } // Fl_Light_Button* o
-      { Fl_Output* o = new Fl_Output(420, 64, 84, 20, "output:");
-        o->labeltype(FL_NO_LABEL);
-      } // Fl_Output* o
       o->end();
       Fl_Group::current()->resizable(o);
     } // Fl_Table* o

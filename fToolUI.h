@@ -29,7 +29,6 @@ extern Fl_Button *buttonCopy;
 extern Fl_Button *buttonWrite;
 extern Fl_Button *buttonCustom;
 #include <FL/Fl_Table.H>
-#include <FL/Fl_Output.H>
 Fl_Double_Window* make_window();
 extern Fl_Menu_Item menu_barMain[];
 #define menuitemFileopen (menu_barMain+0)

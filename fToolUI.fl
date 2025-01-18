@@ -138,6 +138,7 @@ Function {make_window()} {open
     }
     Fl_Button buttonRead {
       label {@refresh    读取所有参数}
+      callback {fl_message("连接后自动读取参数，无需手动读取");} selected
       xywh {20 215 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Button buttonCopy {
@@ -155,10 +156,6 @@ Function {make_window()} {open
     Fl_Table {} {
       label {参数列表} open
       xywh {220 45 485 420} box THIN_UP_FRAME color 52 labeltype NO_LABEL labelfont 1 labelsize 15 align 21 resizable
-    } {
-      Fl_Browser {} {
-        xywh {245 70 120 160}
-      }
-    }
+    } {}
   }
 }
