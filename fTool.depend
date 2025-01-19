@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1737215794 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
+1737256860 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
 	"fToolUI.h"
 
-1737215927 c:\users\runyu\desktop\ftool\ftoolui.h
+1737256860 c:\users\runyu\desktop\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Native_File_Chooser.H>
 	"ini.h"

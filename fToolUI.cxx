@@ -201,9 +201,8 @@ Fl_Double_Window* make_window() {
       o->labelsize(15);
       o->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
       o->end();
-      Fl_Group::current()->resizable(o);
     } // Fl_Table* o
-    windowMain->size_range(720, 480);
+    windowMain->size_range(720, 480, 720, 480);
     windowMain->end();
   } // Fl_Double_Window* windowMain
   return windowMain;

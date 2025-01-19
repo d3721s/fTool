@@ -26,8 +26,8 @@ comment {分隔符} {in_source in_header
 Function {make_window()} {open
 } {
   Fl_Window windowMain {
-    label fTool open
-    xywh {866 393 720 480} type Double color 52 align 16 hide resizable size_range {720 480 0 0}
+    label fTool open selected
+    xywh {949 367 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box THIN_UP_BOX color 52
@@ -138,7 +138,7 @@ Function {make_window()} {open
     }
     Fl_Button buttonRead {
       label {@refresh    读取所有参数}
-      callback {fl_message("连接后自动读取参数，无需手动读取");} selected
+      callback {fl_message("连接后自动读取参数，无需手动读取");}
       xywh {20 215 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Button buttonCopy {
@@ -155,7 +155,7 @@ Function {make_window()} {open
     }
     Fl_Table {} {
       label {参数列表} open
-      xywh {220 45 485 420} box THIN_UP_FRAME color 52 labeltype NO_LABEL labelfont 1 labelsize 15 align 21 resizable
+      xywh {220 45 485 420} box THIN_UP_FRAME color 52 labeltype NO_LABEL labelfont 1 labelsize 15 align 21
     } {}
   }
 }
