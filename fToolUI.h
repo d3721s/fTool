@@ -8,6 +8,17 @@
 void pushFTD(mINI::INIStructure* fileIni);
 void pullFTD(mINI::INIStructure* fileIni);
 // 分隔符
+#include <FL/Fl_Table.H>
+#include <FL/fl_draw.H>
+
+class WidgetTable : public Fl_Table {
+protected:
+  void draw_cell(TableContext context, int R=0, int C=0, int X=0, int Y=0, int W=0, int H=0) FL_OVERRIDE;
+public:
+  WidgetTable(int x, int y, int w, int h, const char *l=0) ;
+  ~WidgetTable();
+  void SetSize(int newrows, int newcols);
+};
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *windowMain;
 #include <FL/Fl_Menu_Bar.H>
@@ -28,7 +39,7 @@ extern Fl_Button *buttonRead;
 extern Fl_Button *buttonCopy;
 extern Fl_Button *buttonWrite;
 extern Fl_Button *buttonCustom;
-#include <FL/Fl_Table.H>
+extern WidgetTable *iniTable;
 Fl_Double_Window* make_window();
 extern Fl_Menu_Item menu_barMain[];
 #define menuitemFileopen (menu_barMain+0)

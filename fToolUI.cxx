@@ -11,6 +11,135 @@ void pullFTD(mINI::INIStructure* fileIni) {
 }
 // 分隔符
 
+void WidgetTable::draw_cell(TableContext context, int R, int C, int X, int Y, int W, int H) {
+  switch ( context ) {
+      case CONTEXT_STARTPAGE:
+        fl_font(FL_HELVETICA, 12);                // font used by all headers
+        break;
+
+      case CONTEXT_RC_RESIZE: {
+        int X, Y, W, H;
+        int index = 0;
+        for ( int r = 0; r<rows(); r++ ) {
+          for ( int c = 0; c<cols(); c++ ) {
+            if ( index >= children() ) break;
+            find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
+            child(index++)->resize(X,Y,W,H);
+          }
+        }
+        init_sizes();                     // tell group children resized
+        return;
+      }
+
+      case CONTEXT_ROW_HEADER:
+        fl_push_clip(X, Y, W, H);
+        {
+          static char s[40];
+          sprintf(s, "Row %d", R);
+          fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, row_header_color());
+          fl_color(FL_BLACK);
+          fl_draw(s, X, Y, W, H, FL_ALIGN_CENTER);
+        }
+        fl_pop_clip();
+        return;
+
+      case CONTEXT_COL_HEADER:
+        fl_push_clip(X, Y, W, H);
+        {
+          static char s[40];
+          sprintf(s, "Column %d", C);
+          fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, col_header_color());
+          fl_color(FL_BLACK);
+          fl_draw(s, X, Y, W, H, FL_ALIGN_CENTER);
+        }
+        fl_pop_clip();
+        return;
+
+      case CONTEXT_CELL:
+        return;           // fltk handles drawing the widgets
+
+      default:
+        return;
+    }
+}
+
+WidgetTable::WidgetTable(int x, int y, int w, int h, const char *l) : Fl_Table(x,y,w,h,l) {
+  col_header(1);
+      col_resize(1);
+      col_header_height(25);
+      row_header(1);
+      row_resize(1);
+      row_header_width(80);
+      end();
+}
+
+WidgetTable::~WidgetTable() {
+  printf("Hello, World!\n");
+}
+
+void WidgetTable::SetSize(int newrows, int newcols) {
+  clear();            // clear any previous widgets, if any
+      rows(newrows);
+      cols(newcols);
+
+      begin();            // start adding widgets to group
+      {
+        for ( int r = 0; r<newrows; r++ ) {
+          for ( int c = 0; c<newcols; c++ ) {
+            int X,Y,W,H;
+            find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
+
+            char s[40];
+            if ( c & 1 ) {
+              // Create the input widgets
+              sprintf(s, "%d.%d", r, c);
+              Fl_Input *in = new Fl_Input(X,Y,W,H);
+              in->value(s);
+            } else {
+              // Create the light buttons
+              sprintf(s, "%d/%d ", r, c);
+              Fl_Light_Button *butt = new Fl_Light_Button(X,Y,W,H);
+              butt->copy_label(s);
+              butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+//              butt->callback(button_cb, (void*)0);
+              butt->value( ((r+c*2) & 4 ) ? 1 : 0);
+            }
+          }
+        }  clear();            // clear any previous widgets, if any
+      rows(newrows);
+      cols(newcols);
+
+      begin();            // start adding widgets to group
+      {
+        for ( int r = 0; r<newrows; r++ ) {
+          for ( int c = 0; c<newcols; c++ ) {
+            int X,Y,W,H;
+            find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
+
+            char s[40];
+            if ( c & 1 ) {
+              // Create the input widgets
+              sprintf(s, "%d.%d", r, c);
+              Fl_Input *in = new Fl_Input(X,Y,W,H);
+              in->value(s);
+            } else {
+              // Create the light buttons
+              sprintf(s, "%d/%d ", r, c);
+              Fl_Light_Button *butt = new Fl_Light_Button(X,Y,W,H);
+              butt->copy_label(s);
+              butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+//              butt->callback(button_cb, (void*)0);
+              butt->value( ((r+c*2) & 4 ) ? 1 : 0);
+            }
+          }
+        }
+      }
+      end();
+
+      }
+      end();
+}
+
 Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
 
 Fl_Menu_Bar *barMain=(Fl_Menu_Bar *)0;
@@ -96,6 +225,8 @@ Fl_Button *buttonCopy=(Fl_Button *)0;
 Fl_Button *buttonWrite=(Fl_Button *)0;
 
 Fl_Button *buttonCustom=(Fl_Button *)0;
+
+WidgetTable *iniTable=(WidgetTable *)0;
 
 Fl_Double_Window* make_window() {
   { windowMain = new Fl_Double_Window(720, 480, "fTool");
@@ -193,15 +324,19 @@ Fl_Double_Window* make_window() {
       buttonCustom->color(FL_LIGHT2);
       buttonCustom->labelfont(1);
     } // Fl_Button* buttonCustom
-    { Fl_Table* o = new Fl_Table(220, 45, 485, 420, "参数列表");
-      o->box(FL_THIN_UP_FRAME);
-      o->color(FL_LIGHT2);
-      o->labeltype(FL_NO_LABEL);
-      o->labelfont(1);
-      o->labelsize(15);
-      o->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-      o->end();
-    } // Fl_Table* o
+    { iniTable = new WidgetTable(220, 45, 485, 420, "参数列表");
+      iniTable->box(FL_THIN_UP_FRAME);
+      iniTable->color(FL_LIGHT2);
+      iniTable->selection_color(FL_BACKGROUND_COLOR);
+      iniTable->labeltype(FL_NO_LABEL);
+      iniTable->labelfont(1);
+      iniTable->labelsize(15);
+      iniTable->labelcolor(FL_FOREGROUND_COLOR);
+      iniTable->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+      iniTable->when(FL_WHEN_RELEASE);
+      iniTable->SetSize(50, 50);
+      iniTable->end();
+    } // WidgetTable* iniTable
     windowMain->size_range(720, 480, 720, 480);
     windowMain->end();
   } // Fl_Double_Window* windowMain
