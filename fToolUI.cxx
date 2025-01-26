@@ -9,7 +9,6 @@ void pushFTD(mINI::INIStructure* fileIni) {
 void pullFTD(mINI::INIStructure* fileIni) {
   printf("Hello, World!\n");
 }
-// 分隔符
 
 void WidgetTable::draw_cell(TableContext context, int R, int C, int X, int Y, int W, int H) {
   switch ( context ) {
@@ -105,40 +104,18 @@ void WidgetTable::SetSize(int newrows, int newcols) {
               butt->value( ((r+c*2) & 4 ) ? 1 : 0);
             }
           }
-        }  clear();            // clear any previous widgets, if any
-      rows(newrows);
-      cols(newcols);
-
-      begin();            // start adding widgets to group
-      {
-        for ( int r = 0; r<newrows; r++ ) {
-          for ( int c = 0; c<newcols; c++ ) {
-            int X,Y,W,H;
-            find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
-
-            char s[40];
-            if ( c & 1 ) {
-              // Create the input widgets
-              sprintf(s, "%d.%d", r, c);
-              Fl_Input *in = new Fl_Input(X,Y,W,H);
-              in->value(s);
-            } else {
-              // Create the light buttons
-              sprintf(s, "%d/%d ", r, c);
-              Fl_Light_Button *butt = new Fl_Light_Button(X,Y,W,H);
-              butt->copy_label(s);
-              butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-//              butt->callback(button_cb, (void*)0);
-              butt->value( ((r+c*2) & 4 ) ? 1 : 0);
-            }
-          }
         }
       }
       end();
-
-      }
-      end();
 }
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
 
 Fl_Double_Window *windowMain=(Fl_Double_Window *)0;
 
@@ -326,7 +303,7 @@ Fl_Double_Window* make_window() {
     } // Fl_Button* buttonCustom
     { iniTable = new WidgetTable(220, 45, 485, 420, "参数列表");
       iniTable->box(FL_THIN_UP_FRAME);
-      iniTable->color(FL_LIGHT2);
+      iniTable->color(FL_LIGHT3);
       iniTable->selection_color(FL_BACKGROUND_COLOR);
       iniTable->labeltype(FL_NO_LABEL);
       iniTable->labelfont(1);
@@ -334,7 +311,7 @@ Fl_Double_Window* make_window() {
       iniTable->labelcolor(FL_FOREGROUND_COLOR);
       iniTable->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
       iniTable->when(FL_WHEN_RELEASE);
-      iniTable->SetSize(50, 50);
+      iniTable->SetSize(150, 4);
       iniTable->end();
     } // WidgetTable* iniTable
     windowMain->size_range(720, 480, 720, 480);

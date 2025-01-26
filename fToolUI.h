@@ -7,7 +7,6 @@
 #include "ini.h"
 void pushFTD(mINI::INIStructure* fileIni);
 void pullFTD(mINI::INIStructure* fileIni);
-// 分隔符
 #include <FL/Fl_Table.H>
 #include <FL/fl_draw.H>
 
@@ -19,6 +18,14 @@ public:
   ~WidgetTable();
   void SetSize(int newrows, int newcols);
 };
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
+// 分隔符
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *windowMain;
 #include <FL/Fl_Menu_Bar.H>

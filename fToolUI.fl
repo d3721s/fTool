@@ -20,9 +20,6 @@ Function {pullFTD(mINI::INIStructure* fileIni)} {open return_type void
   code {printf("Hello, World!\\n");} {}
 }
 
-comment {分隔符} {in_source in_header
-}
-
 decl {\#include <FL/Fl_Table.H>
 \#include <FL/fl_draw.H>} {public global
 }
@@ -124,47 +121,27 @@ class WidgetTable {open : {public Fl_Table}
             butt->value( ((r+c*2) & 4 ) ? 1 : 0);
           }
         }
-      }  clear();            // clear any previous widgets, if any
-    rows(newrows);
-    cols(newcols);
-
-    begin();            // start adding widgets to group
-    {
-      for ( int r = 0; r<newrows; r++ ) {
-        for ( int c = 0; c<newcols; c++ ) {
-          int X,Y,W,H;
-          find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
-
-          char s[40];
-          if ( c & 1 ) {
-            // Create the input widgets
-            sprintf(s, "%d.%d", r, c);
-            Fl_Input *in = new Fl_Input(X,Y,W,H);
-            in->value(s);
-          } else {
-            // Create the light buttons
-            sprintf(s, "%d/%d ", r, c);
-            Fl_Light_Button *butt = new Fl_Light_Button(X,Y,W,H);
-            butt->copy_label(s);
-            butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-            butt->callback(button_cb, (void*)0);
-            butt->value( ((r+c*2) & 4 ) ? 1 : 0);
-          }
-        }
       }
-    }
-    end();
-  
     }
     end();} {}
   }
+}
+
+comment {分隔符
+分隔符
+分隔符
+分隔符
+分隔符
+分隔符
+分隔符
+分隔符} {in_source in_header
 }
 
 Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {798 318 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
+    xywh {817 321 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box THIN_UP_BOX color 52
@@ -291,9 +268,9 @@ Function {make_window()} {open
       xywh {20 395 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Table iniTable {
-      label {参数列表} open
-      xywh {220 45 485 420} box THIN_UP_FRAME color 52 labeltype NO_LABEL labelfont 1 labelsize 15 align 21
-      code0 {iniTable->SetSize(50, 50);}
+      label {参数列表} open selected
+      xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelfont 1 labelsize 15 align 21
+      code0 {iniTable->SetSize(150, 4);}
       class WidgetTable
     } {}
   }
