@@ -11,8 +11,11 @@ int main (int argc, char ** argv)
 {
     std::thread threadUI(startThreadUI);
     std::thread threadMain(startThreadMain);
-    threadUI.join();
-    threadMain.join();
+    while(1)
+    {
+        threadUI.join();
+        threadMain.join();
+    }
     return 0;
 }
 
