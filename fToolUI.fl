@@ -4,7 +4,9 @@ use_FL_COMMAND
 utf8_in_src
 header_name {.h}
 code_name {.cxx}
-decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
+decl {\#include <FL/Fl_Native_File_Chooser.H>
+\#include <FL/Fl_Output.H>
+\#include <FL/Fl_Input.H>} {public global
 }
 
 decl {\#include "ini.h"} {public global
@@ -34,9 +36,8 @@ class WidgetTable {open : {public Fl_Table}
     code {switch ( context )
     {
     case CONTEXT_STARTPAGE:
-        fl_font(FL_HELVETICA, 12);                // font used by all headers
+        fl_font(FL_HELVETICA, 12);
         break;
-
     case CONTEXT_RC_RESIZE:
     {
         int X, Y, W, H;
@@ -50,18 +51,18 @@ class WidgetTable {open : {public Fl_Table}
                 child(index++)->resize(X,Y,W,H);
             }
         }
-        init_sizes();                     // tell group children resized
+        init_sizes();
         return;
     }
-
     case CONTEXT_ROW_HEADER:
         fl_push_clip(X, Y, W, H);
         {
+            fl_color(FL_LIGHT2);
+            fl_rectf(X,Y,W,H);
             static char s[40];
             if (mapProperty.find(R) != mapProperty.end())
             {
-                auto vec = mapProperty[R];
-                std::sprintf(s, "%s", vec[0].c_str());
+                std::sprintf(s, "%s", mapProperty[R][0].c_str());
             }
             else
             {
@@ -70,13 +71,16 @@ class WidgetTable {open : {public Fl_Table}
             fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, row_header_color());
             fl_color(FL_BLACK);
             fl_draw(s, X, Y, W, H, FL_ALIGN_CENTER);
+            fl_color(FL_LIGHT3);
+            fl_rect(X,Y,W,H);
         }
         fl_pop_clip();
         return;
-
     case CONTEXT_COL_HEADER:
         fl_push_clip(X, Y, W, H);
         {
+            fl_color(FL_LIGHT2);
+            fl_rectf(X,Y,W,H);
             static char s[40];
             switch(C)
             {
@@ -98,13 +102,35 @@ class WidgetTable {open : {public Fl_Table}
             fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, col_header_color());
             fl_color(FL_BLACK);
             fl_draw(s, X, Y, W, H, FL_ALIGN_CENTER);
+            fl_color(FL_LIGHT3);
+            fl_rect(X,Y,W,H);
         }
         fl_pop_clip();
         return;
-
     case CONTEXT_CELL:
-        return;
 
+        fl_push_clip(X,Y,W,H);
+        {
+            fl_color(FL_LIGHT2);
+            fl_rectf(X,Y,W,H);
+            switch(C)
+            {
+            case 0:
+                fl_color(FL_BLACK);
+                fl_draw(mapProperty[R][1].c_str(), X,Y,W,H, FL_ALIGN_CENTER);
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            }
+            fl_color(FL_LIGHT3);
+            fl_rect(X,Y,W,H);
+        }
+        fl_pop_clip();
+        return;
     default:
         return;
     }} {}
@@ -112,49 +138,27 @@ class WidgetTable {open : {public Fl_Table}
   Function {WidgetTable(int x, int y, int w, int h, const char *l=0) : Fl_Table(x,y,w,h,l)} {open
   } {
     code {col_header(1);
-    col_resize(1);
     col_header_height(25);
     row_header(1);
-    row_resize(1);
-    row_header_width(80);
-    end();} {}
+    clear();
+    rows(186);
+    cols(4);
+    col_width(0,200);
+    col_width(1,80);
+    col_width(2,80);
+    col_width(3,65);
+    begin();
+    {
+        int X,Y,W,H;
+        find_cell(CONTEXT_TABLE, 0, 0, X, Y, W, H);
+
+    }
+    end();} {selected
+    }
   }
   Function {~WidgetTable()} {open
   } {
     code {printf("Hello, World!\\n");} {}
-  }
-  Function {SetSize(int newrows, int newcols)} {open return_type void
-  } {
-    code {clear();            // clear any previous widgets, if any
-    rows(newrows);
-    cols(newcols);
-
-    begin();            // start adding widgets to group
-    {
-      for ( int r = 0; r<newrows; r++ ) {
-        for ( int c = 0; c<newcols; c++ ) {
-          int X,Y,W,H;
-          find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
-
-          char s[40];
-          if ( c & 1 ) {
-            // Create the input widgets
-            sprintf(s, "%d.%d", r, c);
-            Fl_Input *in = new Fl_Input(X,Y,W,H);
-            in->value(s);
-          } else {
-            // Create the light buttons
-            sprintf(s, "%d/%d ", r, c);
-            Fl_Light_Button *butt = new Fl_Light_Button(X,Y,W,H);
-            butt->copy_label(s);
-            butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-            butt->callback(button_cb, (void*)0);
-            butt->value( ((r+c*2) & 4 ) ? 1 : 0);
-          }
-        }
-      }
-    }
-    end();} {}
   }
 }
 
@@ -172,7 +176,7 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {1067 286 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
+    xywh {1466 372 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box THIN_UP_BOX color 52
@@ -301,12 +305,7 @@ Function {make_window()} {open
     Fl_Table iniTable {
       label {参数列表} open
       xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelfont 1 labelsize 15 align 21
-      code0 {iniTable->SetSize(186, 4);}
       class WidgetTable
-    } {
-      Fl_Text_Display textName {selected
-        xywh {260 45 80 25} box THIN_UP_FRAME labeltype NO_LABEL
-      }
-    }
+    } {}
   }
 }

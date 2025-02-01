@@ -5,7 +5,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Native_File_Chooser.H>
 #include <FL/Fl_Output.H>
-#include <FL/Fl_Text_Display.H>
+#include <FL/Fl_Input.H>
 #include "ini.h"
 void pushFTD(mINI::INIStructure* fileIni);
 void pullFTD(mINI::INIStructure* fileIni);
@@ -18,7 +18,6 @@ protected:
 public:
   WidgetTable(int x, int y, int w, int h, const char *l=0) ;
   ~WidgetTable();
-  void SetSize(int newrows, int newcols);
 };
 // 分隔符
 // 分隔符

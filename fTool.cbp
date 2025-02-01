@@ -42,6 +42,7 @@
 		<Unit filename="fToolUI.cxx" />
 		<Unit filename="fToolUI.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="map.txt" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
