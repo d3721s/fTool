@@ -1,11 +1,13 @@
 # depslib dependency file v1.0
-1738391575 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
+1738397686 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
 	"fToolUI.h"
 	"map.txt"
 
-1738397630 c:\users\runyu\desktop\ftool\ftoolui.h
+1738399548 c:\users\runyu\desktop\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Native_File_Chooser.H>
+	<FL/Fl_Output.H>
+	<FL/Fl_Text_Display.H>
 	"ini.h"
 	<FL/Fl_Table.H>
 	<FL/fl_draw.H>
@@ -310,7 +312,7 @@
 	<FL/Fl_Input.H>
 	<FL/Fl_Menu_Button.H>
 
-1738387752 source:c:\users\runyu\desktop\ftool\main.cpp
+1738398776 source:c:\users\runyu\desktop\ftool\main.cpp
 	<iostream>
 	<thread>
 	<chrono>
@@ -14617,4 +14619,19 @@
 	<FL/Fl_Widget.H>
 
 1738397075 c:\users\runyu\desktop\ftool\map.txt
+
+1735914743 c:\msys64\ucrt64\include\fl\fl_text_display.h
+	<FL/Fl.H>
+	"fl_draw.H"
+	"Fl_Group.H"
+	"Fl_Widget.H"
+	"Fl_Scrollbar.H"
+	"Fl_Text_Buffer.H"
+	<FL/Fl_Text_Display.H>
+
+1735914743 c:\msys64\ucrt64\include\fl\fl_text_buffer.h
+	<stdarg.h>
+	"fl_attr.h"
+	<assert.h>
+	"Fl_Export.H"
 

@@ -24,6 +24,7 @@ void startThreadUI(void)
     windowMain = make_window();
     windowMain->show();
     Fl::run();
+    std::exit(0);
 }
 
 void startThreadMain(void)

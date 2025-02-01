@@ -101,7 +101,7 @@ WidgetTable::WidgetTable(int x, int y, int w, int h, const char *l) : Fl_Table(x
     col_header_height(25);
     row_header(1);
     row_resize(1);
-    row_header_width(80);
+    row_header_width(40);
     end();
 }
 
@@ -109,7 +109,7 @@ WidgetTable::~WidgetTable()
 {
     printf("Hello, World!\n");
 }
-
+Fl_Text_Display *textName=(Fl_Text_Display *)0;
 void WidgetTable::SetSize(int newrows, int newcols)
 {
     clear();            // clear any previous widgets, if any
@@ -118,30 +118,32 @@ void WidgetTable::SetSize(int newrows, int newcols)
 
     begin();            // start adding widgets to group
     {
-        for ( int r = 0; r<newrows; r++ )
+        for ( int c = 0; c<newcols; c++ )
         {
-            for ( int c = 0; c<newcols; c++ )
+            for ( int r = 0; r<newrows; r++ )
             {
                 int X,Y,W,H;
                 find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
-
+                textName = new Fl_Text_Display(X, Y, W, H);
+                textName->box(FL_THIN_UP_FRAME);
+                textName->labeltype(FL_NO_LABEL);
+                Fl_Text_Buffer *tbuff = new Fl_Text_Buffer();
+                    auto vec = mapProperty[r];
                 char s[40];
-                if ( c & 1 )
+                switch(c)
                 {
-                    // Create the input widgets
-                    sprintf(s, "%d.%d", r, c);
-                    Fl_Input *in = new Fl_Input(X,Y,W,H);
-                    in->value(s);
-                }
-                else
-                {
-                    // Create the light buttons
-                    sprintf(s, "%d/%d ", r, c);
-                    Fl_Light_Button *butt = new Fl_Light_Button(X,Y,W,H);
-                    butt->copy_label(s);
-                    butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
-//              butt->callback(button_cb, (void*)0);
-                    butt->value( ((r+c*2) & 4 ) ? 1 : 0);
+                case 0:
+                    std::sprintf(s, "%s", vec[1].c_str());
+                    tbuff->text(s);
+                         textName->buffer(tbuff);
+           break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+
                 }
             }
         }
