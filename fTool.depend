@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1738389351 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
+1738391575 source:c:\users\runyu\desktop\ftool\ftoolui.cxx
 	"fToolUI.h"
+	"map.txt"
 
-1738391566 c:\users\runyu\desktop\ftool\ftoolui.h
+1738397630 c:\users\runyu\desktop\ftool\ftoolui.h
 	<FL/Fl.H>
 	<FL/Fl_Native_File_Chooser.H>
 	"ini.h"
@@ -14614,4 +14615,6 @@
 
 1735914743 c:\msys64\ucrt64\include\fl\fl_rect.h
 	<FL/Fl_Widget.H>
+
+1738397075 c:\users\runyu\desktop\ftool\map.txt
 

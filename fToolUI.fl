@@ -7,7 +7,7 @@ code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>} {public global
 }
 
-decl {\#include "ini.h"} {selected public global
+decl {\#include "ini.h"} {public global
 }
 
 decl {\#include "map.txt"} {private global
@@ -27,7 +27,7 @@ decl {\#include <FL/Fl_Table.H>
 \#include <FL/fl_draw.H>} {public global
 }
 
-class WidgetTable {: {public Fl_Table}
+class WidgetTable {open : {public Fl_Table}
 } {
   Function {draw_cell(TableContext context, int R=0, int C=0, int X=0, int Y=0, int W=0, int H=0) FL_OVERRIDE} {open protected return_type void
   } {
@@ -78,7 +78,23 @@ class WidgetTable {: {public Fl_Table}
         fl_push_clip(X, Y, W, H);
         {
             static char s[40];
-            sprintf(s, "Column %d", C);
+            switch(C)
+            {
+            case 0:
+                sprintf(s, "名称");
+                break;
+            case 1:
+                sprintf(s, "当前值");
+                break;
+            case 2:
+                sprintf(s, "待写入");
+                break;
+            case 3:
+                sprintf(s, "操作");
+                break;
+            default:
+                break;
+            }
             fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, col_header_color());
             fl_color(FL_BLACK);
             fl_draw(s, X, Y, W, H, FL_ALIGN_CENTER);
@@ -91,7 +107,8 @@ class WidgetTable {: {public Fl_Table}
 
     default:
         return;
-    }} {}
+    }} {selected
+    }
   }
   Function {WidgetTable(int x, int y, int w, int h, const char *l=0) : Fl_Table(x,y,w,h,l)} {open
   } {
@@ -152,10 +169,11 @@ comment {分隔符
 分隔符} {in_source in_header
 }
 
-Function {make_window()} {} {
+Function {make_window()} {open
+} {
   Fl_Window windowMain {
     label fTool open
-    xywh {849 284 720 480} type Double color 52 align 16 hide size_range {720 480 720 480}
+    xywh {849 284 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box THIN_UP_BOX color 52
@@ -284,7 +302,7 @@ Function {make_window()} {} {
     Fl_Table iniTable {
       label {参数列表} open
       xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelfont 1 labelsize 15 align 21
-      code0 {iniTable->SetSize(256, 4);}
+      code0 {iniTable->SetSize(186, 4);}
       class WidgetTable
     } {}
   }
