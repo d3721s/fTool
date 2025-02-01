@@ -107,8 +107,7 @@ class WidgetTable {open : {public Fl_Table}
 
     default:
         return;
-    }} {selected
-    }
+    }} {}
   }
   Function {WidgetTable(int x, int y, int w, int h, const char *l=0) : Fl_Table(x,y,w,h,l)} {open
   } {
@@ -173,7 +172,7 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {849 284 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
+    xywh {1067 286 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box THIN_UP_BOX color 52
@@ -304,6 +303,10 @@ Function {make_window()} {open
       xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelfont 1 labelsize 15 align 21
       code0 {iniTable->SetSize(186, 4);}
       class WidgetTable
-    } {}
+    } {
+      Fl_Text_Display textName {selected
+        xywh {260 45 80 25} box THIN_UP_FRAME labeltype NO_LABEL
+      }
+    }
   }
 }
