@@ -1,3 +1,7 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
 std::unordered_map<uint8_t, std::vector<std::string>> mapProperty=
 {
     {0, {"P0-00", "电机额定电流"}},
@@ -176,7 +180,7 @@ std::unordered_map<uint8_t, std::vector<std::string>> mapProperty=
     {173, {"P8-00", "输入滤波时间"}},
     {174, {"P8-01", "MI1功能选择"}},
     {175, {"P8-02", "MI2功能选择"}},
-    {176, {"P8-03", "MI3功能选择"}},    
+    {176, {"P8-03", "MI3功能选择"}},
     {177, {"P8-04", "MI4功能选择"}},
     {178, {"P8-05", "MI5功能选择"}},
     {179, {"P8-06", "MI6功能选择"}},
