@@ -6,7 +6,8 @@ header_name {.h}
 code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>
 \#include <FL/Fl_Output.H>
-\#include <FL/Fl_Input.H>} {public global
+\#include <FL/Fl_Input.H>
+\#include <FL/Fl_Text_Display.H>} {selected public global
 }
 
 decl {\#include "ini.h"} {public global
@@ -108,28 +109,6 @@ class WidgetTable {open : {public Fl_Table}
         fl_pop_clip();
         return;
     case CONTEXT_CELL:
-
-        fl_push_clip(X,Y,W,H);
-        {
-            fl_color(FL_LIGHT2);
-            fl_rectf(X,Y,W,H);
-            switch(C)
-            {
-            case 0:
-                fl_color(FL_BLACK);
-                fl_draw(mapProperty[R][1].c_str(), X,Y,W,H, FL_ALIGN_CENTER);
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            }
-            fl_color(FL_LIGHT3);
-            fl_rect(X,Y,W,H);
-        }
-        fl_pop_clip();
         return;
     default:
         return;
@@ -149,12 +128,50 @@ class WidgetTable {open : {public Fl_Table}
     col_width(3,65);
     begin();
     {
-        int X,Y,W,H;
-        find_cell(CONTEXT_TABLE, 0, 0, X, Y, W, H);
+        for ( int r = 0; r<186; r++ )
+        {
+            for ( int c = 0; c<4; c++ )
+            {
+                int X,Y,W,H;
+                find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
 
+                char s[40];
+                if ( c == 0 )
+                {
+                    Fl_Text_Display *disp = new Fl_Text_Display(X,Y+2,W,H-2);
+                    Fl_Text_Buffer *tbuff = new Fl_Text_Buffer();
+                    disp->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+                    disp->box(FL_NO_BOX);
+                    disp->color(FL_LIGHT1,FL_BLACK);
+                    disp->buffer(tbuff);
+                    tbuff->text(mapProperty[r][1].c_str());
+                }
+                else if(c == 1)
+                {
+                    Fl_Text_Display *disp = new Fl_Text_Display(X,Y+2,W,H-2);
+                    Fl_Text_Buffer *tbuff = new Fl_Text_Buffer();
+                    disp->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+                    disp->box(FL_NO_BOX);
+                    disp->color(FL_LIGHT1,FL_BLACK);
+                    disp->buffer(tbuff);
+                    tbuff->text("");
+                }
+                else if (c == 2)
+                {
+                    Fl_Input *in = new Fl_Input(X,Y,W,H);
+//                    in->value(s);
+                }
+                else
+                {
+                   Fl_Button *butt = new Fl_Button(X,Y,W,H);
+                    butt->copy_label("写入");
+                    butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+//                    butt->callback(button_cb, (void*)0);
+                }
+            }
+        }
     }
-    end();} {selected
-    }
+    end();} {}
   }
   Function {~WidgetTable()} {open
   } {
@@ -176,7 +193,7 @@ Function {make_window()} {open
 } {
   Fl_Window windowMain {
     label fTool open
-    xywh {1466 372 720 480} type Double color 52 align 16 size_range {720 480 720 480} visible
+    xywh {890 369 720 480} type Double color 52 align 16 resizable size_range {720 480 720 480} visible
   } {
     Fl_Menu_Bar barMain {open
       xywh {0 0 720 30} box THIN_UP_BOX color 52
@@ -304,7 +321,7 @@ Function {make_window()} {open
     }
     Fl_Table iniTable {
       label {参数列表} open
-      xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelfont 1 labelsize 15 align 21
+      xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelsize 15 align 21 resizable
       class WidgetTable
     } {}
   }

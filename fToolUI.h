@@ -6,6 +6,7 @@
 #include <FL/Fl_Native_File_Chooser.H>
 #include <FL/Fl_Output.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Text_Display.H>
 #include "ini.h"
 void pushFTD(mINI::INIStructure* fileIni);
 void pullFTD(mINI::INIStructure* fileIni);

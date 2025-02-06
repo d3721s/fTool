@@ -15,8 +15,7 @@ void WidgetTable::draw_cell(TableContext context, int R, int C, int X, int Y, in
   switch ( context )
       {
       case CONTEXT_STARTPAGE:
-          fl_font(FL_HELVETICA, 12);
-          break;
+          return;
       case CONTEXT_RC_RESIZE:
       {
           int X, Y, W, H;
@@ -87,28 +86,6 @@ void WidgetTable::draw_cell(TableContext context, int R, int C, int X, int Y, in
           fl_pop_clip();
           return;
       case CONTEXT_CELL:
-
-          fl_push_clip(X,Y,W,H);
-          {
-              fl_color(FL_LIGHT2);
-              fl_rectf(X,Y,W,H);
-              switch(C)
-              {
-              case 0:
-                  fl_color(FL_BLACK);
-                  fl_draw(mapProperty[R][1].c_str(), X,Y,W,H, FL_ALIGN_CENTER);
-                  break;
-              case 1:
-                  break;
-              case 2:
-                  break;
-              case 3:
-                  break;
-              }
-              fl_color(FL_LIGHT3);
-              fl_rect(X,Y,W,H);
-          }
-          fl_pop_clip();
           return;
       default:
           return;
@@ -128,9 +105,48 @@ WidgetTable::WidgetTable(int x, int y, int w, int h, const char *l) : Fl_Table(x
       col_width(3,65);
       begin();
       {
-          int X,Y,W,H;
-          find_cell(CONTEXT_TABLE, 0, 0, X, Y, W, H);
+          for ( int r = 0; r<186; r++ )
+          {
+              for ( int c = 0; c<4; c++ )
+              {
+                  int X,Y,W,H;
+                  find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
 
+                  char s[40];
+                  if ( c == 0 )
+                  {
+                      Fl_Text_Display *disp = new Fl_Text_Display(X,Y+2,W,H-2);
+                      Fl_Text_Buffer *tbuff = new Fl_Text_Buffer();
+                      disp->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+                      disp->box(FL_NO_BOX);
+                      disp->color(FL_LIGHT1,FL_BLACK);
+                      disp->buffer(tbuff);
+                      tbuff->text(mapProperty[r][1].c_str());
+                  }
+                  else if(c == 1)
+                  {
+                      Fl_Text_Display *disp = new Fl_Text_Display(X,Y+2,W,H-2);
+                      Fl_Text_Buffer *tbuff = new Fl_Text_Buffer();
+                      disp->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+                      disp->box(FL_NO_BOX);
+                      disp->color(FL_LIGHT1,FL_BLACK);
+                      disp->buffer(tbuff);
+                      tbuff->text("");
+                  }
+                  else if (c == 2)
+                  {
+                      Fl_Input *in = new Fl_Input(X,Y,W,H);
+  //                    in->value(s);
+                  }
+                  else
+                  {
+                     Fl_Button *butt = new Fl_Button(X,Y,W,H);
+                      butt->copy_label("写入");
+                      butt->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+  //                    butt->callback(button_cb, (void*)0);
+                  }
+              }
+          }
       }
       end();
 }
@@ -336,12 +352,13 @@ Fl_Double_Window* make_window() {
       iniTable->color(FL_LIGHT3);
       iniTable->selection_color(FL_BACKGROUND_COLOR);
       iniTable->labeltype(FL_NO_LABEL);
-      iniTable->labelfont(1);
+      iniTable->labelfont(0);
       iniTable->labelsize(15);
       iniTable->labelcolor(FL_FOREGROUND_COLOR);
       iniTable->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
       iniTable->when(FL_WHEN_RELEASE);
       iniTable->end();
+      Fl_Group::current()->resizable(iniTable);
     } // WidgetTable* iniTable
     windowMain->size_range(720, 480, 720, 480);
     windowMain->end();
