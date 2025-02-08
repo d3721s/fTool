@@ -5,6 +5,8 @@
 #include <FL/Fl.H>
 #include "fToolUI.h"
 
+extern std::unordered_map<uint8_t, std::vector<std::string>> mapProperty;
+
 void startThreadUI(void);
 void startThreadMain(void);
 int main (int argc, char ** argv)
@@ -31,6 +33,6 @@ void startThreadMain(void)
 {
     while(1)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(4));
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 }

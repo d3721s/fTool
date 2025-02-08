@@ -7,7 +7,7 @@ code_name {.cxx}
 decl {\#include <FL/Fl_Native_File_Chooser.H>
 \#include <FL/Fl_Output.H>
 \#include <FL/Fl_Input.H>
-\#include <FL/Fl_Text_Display.H>} {selected public global
+\#include <FL/Fl_Text_Display.H>} {public global
 }
 
 decl {\#include "ini.h"} {public global
@@ -320,8 +320,8 @@ Function {make_window()} {open
       xywh {20 395 180 50} box THIN_UP_BOX color 52 labelfont 1
     }
     Fl_Table iniTable {
-      label {参数列表} open
-      xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelsize 15 align 21 resizable
+      label {参数列表} open selected
+      xywh {220 45 485 420} box THIN_UP_FRAME color 54 labeltype NO_LABEL labelsize 18 align 21 resizable
       class WidgetTable
     } {}
   }
